@@ -25,7 +25,7 @@ import lacocoSticker from "../assets/projects/la-coco/sticker.jpg";
 import lacocoCupwrap from "../assets/projects/la-coco/cupwrap.jpg";
 import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 
-import herbalookHero from "../assets/projects/herbalook-catalogue/hero.jpg";
+import herbalookHero from "../assets/projects/herbalook-catalogue/hero-new.jpg";
 import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
 import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
 import herbalookSoap from "../assets/projects/herbalook-catalogue/soap.jpg";

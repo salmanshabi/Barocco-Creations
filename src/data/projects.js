@@ -1,0 +1,130 @@
+import baroqueHero from "../assets/projects/baroque-bougies/hero.jpg";
+import baroqueMockup1 from "../assets/projects/baroque-bougies/mockup1.jpg";
+import baroqueMockup2 from "../assets/projects/baroque-bougies/mockup2.jpg";
+import baroqueMockup3 from "../assets/projects/baroque-bougies/mockup3.jpg";
+import baroqueMockup4 from "../assets/projects/baroque-bougies/mockup4.jpg";
+import baroqueEnvelope from "../assets/projects/baroque-bougies/envelope1.jpg";
+import baroqueStationery from "../assets/projects/baroque-bougies/mockup5.jpg";
+import baroqueSign from "../assets/projects/baroque-bougies/mockup6.jpg";
+import baroqueApron from "../assets/projects/baroque-bougies/mockup7.jpg";
+
+const projects = [
+  {
+    id: "baroque-bougies",
+    name: "Baroque Bougies",
+    category: "Branding",
+    tags: ["Branding", "Packaging", "UX/UI"],
+    year: "2024",
+    teaser: "A luxury candle brand where classical sculpture meets modern sensory experience",
+    description:
+      "Baroque Bougies is a luxury candle brand built on the concept of 'Smell The Art' — fusing baroque sculpture iconography with contemporary product design. The project encompassed full brand identity, packaging design, business collateral, and e-commerce UX architecture. The visual system draws from classical marble torso illustrations, rich teal and burgundy tones, and ornamental baroque patterns to create a brand that feels both timeless and indulgent.",
+    client: "Baroque Bougies",
+    services: ["Brand Identity", "Logo Design", "Packaging Design", "UX/UI Design", "Business Collateral"],
+    tools: ["Illustrator", "Photoshop", "Figma", "InDesign"],
+    link: null,
+    images: {
+      hero: baroqueHero,
+      gallery: [baroqueMockup1, baroqueMockup3, baroqueMockup2, baroqueMockup4, baroqueEnvelope, baroqueStationery, baroqueSign, baroqueApron],
+    },
+  },
+  {
+    id: "barocco-creations",
+    name: "Barocco Creations",
+    category: "Branding",
+    tags: ["Branding", "Logo Design"],
+    year: "2024",
+    teaser: "A complete brand identity system built on baroque typographic forms",
+    description:
+      "A complete brand identity for a graphic design and full-stack development studio. The visual system draws from baroque aesthetics — fluid curves, organic forms, and refined typography — fused with a contemporary digital sensibility. The result is a brand that feels timeless yet distinctly modern.",
+    client: "Self-initiated",
+    services: ["Brand Strategy", "Visual Identity", "Logo Design", "Motion Design"],
+    tools: ["Illustrator", "Figma", "After Effects"],
+    link: null,
+    images: null,
+  },
+  {
+    id: "olive-and-stone",
+    name: "Olive & Stone",
+    category: "Branding",
+    tags: ["Restaurant Branding", "Web"],
+    year: "2024",
+    teaser: "Editorial identity and digital presence for a Mediterranean concept restaurant",
+    description:
+      "Brand identity and digital presence for a Mediterranean fine-dining restaurant. The design language emphasizes natural textures, warm earth tones, and editorial-quality typography to evoke an atmosphere of rustic sophistication.",
+    client: "Olive & Stone Restaurant Group",
+    services: ["Brand Identity", "Menu Design", "Web Design", "Web Development"],
+    tools: ["Figma", "Illustrator", "React", "Tailwind CSS"],
+    link: null,
+    images: null,
+  },
+  {
+    id: "meridian-finance",
+    name: "Meridian Finance",
+    category: "Web Projects",
+    tags: ["Web App", "UX/UI", "React"],
+    year: "2023",
+    teaser: "Data-rich financial dashboard with a calm, precision-first interface",
+    description:
+      "A responsive financial dashboard application built for clarity and speed. Complex data visualizations were distilled into clean, intuitive interfaces that empower users to make informed decisions at a glance.",
+    client: "Meridian Capital",
+    services: ["UX Research", "UI Design", "Frontend Development", "Data Visualization"],
+    tools: ["React", "Node.js", "PostgreSQL", "Figma", "D3.js"],
+    link: null,
+    images: null,
+  },
+  {
+    id: "nomad-journal",
+    name: "Nomad Journal",
+    category: "Graphic Design",
+    tags: ["Editorial Design", "Typography"],
+    year: "2023",
+    teaser: "A travel editorial publication exploring type as illustration",
+    description:
+      "Editorial design for an independent travel publication. Each spread was crafted with meticulous attention to typographic hierarchy, whitespace, and photographic pacing — turning every page into a visual journey.",
+    client: "Nomad Media",
+    services: ["Editorial Design", "Typography", "Art Direction", "Print Production"],
+    tools: ["InDesign", "Photoshop", "Lightroom"],
+    link: null,
+    images: null,
+  },
+  {
+    id: "solis-architecture",
+    name: "Solis Architecture",
+    category: "UX/UI",
+    tags: ["Website", "UX/UI", "Next.js"],
+    year: "2024",
+    teaser: "Minimal architecture studio site with immersive project storytelling",
+    description:
+      "A portfolio website for an architecture firm that mirrors the precision and elegance of their built work. Minimalist layouts, generous whitespace, and carefully choreographed scroll animations create an experience as considered as the structures it showcases.",
+    client: "Solis Architecture Studio",
+    services: ["UX Design", "UI Design", "Frontend Development", "Motion Design"],
+    tools: ["Next.js", "Framer Motion", "Tailwind CSS", "Figma"],
+    link: null,
+    images: null,
+  },
+  {
+    id: "forma-studio",
+    name: "Forma Studio",
+    category: "Branding",
+    tags: ["Brand Identity", "Motion"],
+    year: "2022",
+    teaser: "Motion-first brand system for a contemporary design collective",
+    description:
+      "A dynamic brand identity for a creative consultancy specializing in spatial design. The system features a flexible logo that adapts across media, a restrained color palette, and motion principles that bring the brand to life in digital contexts.",
+    client: "Forma Design Collective",
+    services: ["Brand Strategy", "Visual Identity", "Motion Design", "Guidelines"],
+    tools: ["Figma", "After Effects", "Illustrator"],
+    link: null,
+    images: null,
+  },
+];
+
+export const filterCategories = [
+  "All",
+  "Graphic Design",
+  "UX/UI",
+  "Web Projects",
+  "Branding",
+];
+
+export default projects;

@@ -176,6 +176,52 @@ export default function ProjectDetail() {
         </div>
       </div>
 
+      {/* Live interactive website embed */}
+      {project.link && (
+        <div className="px-6 py-16 md:px-12 lg:px-20">
+          <div className="mx-auto max-w-6xl">
+            <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-sand/30">
+              Live Preview
+            </h3>
+            <p className="mb-8 font-jost text-sm font-light text-cream/40">
+              Interact with the live website below — scroll, click, and explore the full experience.
+            </p>
+
+            {/* Browser chrome frame */}
+            <div className="overflow-hidden rounded-lg border border-sand/10">
+              {/* Browser toolbar */}
+              <div className="flex items-center gap-3 border-b border-sand/10 bg-olive-mid/60 px-4 py-3">
+                <div className="flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/60" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-green-400/60" />
+                </div>
+                <div className="flex-1 rounded-md bg-olive-dark/50 px-4 py-1.5 text-center">
+                  <span className="font-mono text-[11px] text-cream/30">{project.link}</span>
+                </div>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40 transition-colors hover:text-sand"
+                >
+                  Open ↗
+                </a>
+              </div>
+
+              {/* Iframe */}
+              <iframe
+                src={project.link}
+                title={`${project.name} — Live Preview`}
+                className="h-[75vh] w-full bg-white"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* External link */}
       {project.link && (
         <div className="px-6 py-10 md:px-12">
@@ -185,7 +231,7 @@ export default function ProjectDetail() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-sand bg-sand px-6 py-3 font-jost text-xs font-medium uppercase tracking-[0.2em] text-olive-dark transition-all duration-300 hover:bg-transparent hover:text-sand"
           >
-            View Live Project
+            View Full Site
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M4 12L12 4M12 4H6M12 4V10" />
             </svg>

@@ -25,6 +25,13 @@ import lacocoSticker from "../assets/projects/la-coco/sticker.jpg";
 import lacocoCupwrap from "../assets/projects/la-coco/cupwrap.jpg";
 import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 
+import herbalookHero from "../assets/projects/herbalook-catalogue/hero.jpg";
+import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
+import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
+import herbalookSoap from "../assets/projects/herbalook-catalogue/soap.jpg";
+import herbalookPipore from "../assets/projects/herbalook-catalogue/pipore.jpg";
+import herbalookMateCups from "../assets/projects/herbalook-catalogue/mate-cups.jpg";
+
 const projects = [
   {
     id: "baroque-bougies",
@@ -96,6 +103,24 @@ const projects = [
     images: {
       hero: lacocoHero,
       gallery: [lacocoBag, lacocoBox, lacocoSticker, lacocoCupwrap, lacocoLogo],
+    },
+  },
+  {
+    id: "herbalook-catalogue",
+    name: "Herbalook Catalogue",
+    category: "Web Projects",
+    tags: ["Web App", "UX/UI", "React"],
+    year: "2025",
+    teaser: "A B2B product catalogue for organic yerba mate with animated storytelling",
+    description:
+      "Herbalook Catalogue is a fully animated B2B web application built for an organic yerba mate distributor. The site features a cinematic hero with parallax scrolling, product cards with hover animations, category filtering, a partner benefits section with staggered reveal animations, and a contact form integrated with Google Sheets. Built with React, Vite, Tailwind CSS, and Framer Motion — all in Hebrew RTL layout. The design balances rich product photography with clean typography and smooth scroll-driven animations throughout.",
+    client: "Herbalook",
+    services: ["Web Design", "Web Development", "UX/UI Design", "Animation"],
+    tools: ["React", "Vite", "Tailwind CSS", "Framer Motion", "TypeScript"],
+    link: "https://herbalookcatalogue.com",
+    images: {
+      hero: herbalookHero,
+      gallery: [herbalookLogo, herbalookProductSet, herbalookMateCups, herbalookPipore, herbalookSoap],
     },
   },
   {

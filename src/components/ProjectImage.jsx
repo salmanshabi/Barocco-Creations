@@ -1,4 +1,32 @@
 const patterns = {
+  "herbalook-catalogue": (
+    <>
+      {/* Leaf vein pattern */}
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i}>
+          <line
+            x1="300"
+            y1={60 + i * 110}
+            x2="300"
+            y2={140 + i * 110}
+            stroke="rgba(200,168,130,0.07)"
+            strokeWidth="0.8"
+          />
+          {[-3, -2, -1, 1, 2, 3].map((j) => (
+            <line
+              key={j}
+              x1="300"
+              y1={90 + i * 110}
+              x2={300 + j * 40}
+              y2={70 + i * 110 + Math.abs(j) * 10}
+              stroke="rgba(200,168,130,0.05)"
+              strokeWidth="0.5"
+            />
+          ))}
+        </g>
+      ))}
+    </>
+  ),
   "la-coco": (
     <>
       {/* Palm frond radiating lines */}

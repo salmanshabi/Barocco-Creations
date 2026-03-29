@@ -14,12 +14,22 @@ export default function Contact() {
     <section id="contact" className="relative px-6 py-32">
       {/* Background monogram */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-        <img
-          src={monogram}
-          alt=""
-          className="h-[45vh] w-auto opacity-[0.03]"
-          style={{ animation: "spin-slow 60s linear infinite" }}
-        />
+        <div className="relative">
+          {/* Orbit ring */}
+          <div
+            className="absolute inset-[-4vh] rounded-full border border-sand/[0.03]"
+            style={{ animation: "spin-slow 60s linear infinite" }}
+          >
+            <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sand/20" />
+          </div>
+
+          <img
+            src={monogram}
+            alt=""
+            className="h-[45vh] w-auto opacity-[0.03]"
+            style={{ animation: "float 8s ease-in-out infinite" }}
+          />
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-xl">

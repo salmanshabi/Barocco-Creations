@@ -26,6 +26,9 @@ import lacocoCupwrap from "../assets/projects/la-coco/cupwrap.jpg";
 import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 
 import herbalookHero from "../assets/projects/herbalook-catalogue/hero-new.jpg";
+
+import nexoraTemplatesNew from "../assets/projects/nexora-ai/templates-new.jpg";
+import nexoraTemplatesPage from "../assets/projects/nexora-ai/templates-page.jpg";
 import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
 import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
 import herbalookSoap from "../assets/projects/herbalook-catalogue/soap.jpg";
@@ -121,6 +124,24 @@ const projects = [
     images: {
       hero: herbalookHero,
       gallery: [herbalookLogo, herbalookProductSet, herbalookMateCups, herbalookPipore, herbalookSoap],
+    },
+  },
+  {
+    id: "nexora-ai",
+    name: "Nexora AI",
+    category: "Web Projects",
+    tags: ["Web App", "AI", "Next.js"],
+    year: "2025",
+    teaser: "An AI-powered website builder with template studio, drag-and-drop editor, and multi-language support",
+    description:
+      "Nexora AI is a full-stack AI website builder that lets users generate complete websites from natural language prompts. The platform features a template studio with categorized starter designs, an AI-assisted drag-and-drop editor, multi-language support (English/Hebrew), authentication with NextAuth, Stripe payment integration, and a visual builder powered by multiple AI models (Anthropic, OpenAI, Google Gemini). Built with Next.js 16, Prisma, Tailwind CSS v4, Framer Motion, and deployed on Vercel with cron jobs for scheduled publishing, cart recovery, and campaign delivery.",
+    client: "Self-initiated",
+    services: ["Full-Stack Development", "AI Integration", "UX/UI Design", "Product Design"],
+    tools: ["Next.js", "React", "Tailwind CSS", "Prisma", "Stripe", "NextAuth", "Vercel", "Framer Motion"],
+    link: null,
+    images: {
+      hero: nexoraTemplatesNew,
+      gallery: [nexoraTemplatesNew, nexoraTemplatesPage],
     },
   },
   {

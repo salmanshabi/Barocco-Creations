@@ -15,6 +15,8 @@ import miraProducts from "../assets/projects/mira-skincare/products.jpg";
 import miraLogovariations from "../assets/projects/mira-skincare/logovariations.jpg";
 import miraColors from "../assets/projects/mira-skincare/colors.jpg";
 
+import ventenaraHero from "../assets/projects/ventenara/hero.jpg";
+import ventenaraTagline from "../assets/projects/ventenara/logo-tagline.jpg";
 
 const projects = [
   {
@@ -51,6 +53,24 @@ const projects = [
     images: {
       hero: miraHero,
       gallery: [miraProducts, miraBusinesscard, miraEnvelope, miraLogovariations, miraColors],
+    },
+  },
+  {
+    id: "ventenara",
+    name: "Ventenara",
+    category: "Branding",
+    tags: ["Branding", "Logo Design", "Packaging"],
+    year: "2024",
+    teaser: "A regal logo identity for an antique products packaging house",
+    description:
+      "Ventenara is a branding project for an antique products packaging business built around the tagline 'Guarding Eternity.' The logo features an ornate gold chrysanthemum-inspired medallion — a radial bloom of flowing, hand-drawn petals — set against a deep navy backdrop. The wordmark uses an elegant, high-contrast serif with fine hairline strokes that channel classical luxury and timelessness. The identity is designed to evoke heritage, trust, and the meticulous care of preserving objects of value.",
+    client: "Ventenara",
+    services: ["Brand Identity", "Logo Design"],
+    tools: ["Illustrator"],
+    link: null,
+    images: {
+      hero: ventenaraHero,
+      gallery: [ventenaraTagline],
     },
   },
   {

@@ -1,4 +1,22 @@
 const patterns = {
+  "ventenara": (
+    <>
+      {/* Radial petal burst */}
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        <ellipse
+          key={i}
+          cx="300"
+          cy="225"
+          rx="40"
+          ry="120"
+          fill="none"
+          stroke="rgba(200,168,130,0.06)"
+          strokeWidth="0.6"
+          transform={`rotate(${i * 45}, 300, 225)`}
+        />
+      ))}
+    </>
+  ),
   "mira-skincare": (
     <>
       {/* Flowing wave curves */}

@@ -18,6 +18,13 @@ import miraColors from "../assets/projects/mira-skincare/colors.jpg";
 import ventenaraHero from "../assets/projects/ventenara/hero.jpg";
 import ventenaraTagline from "../assets/projects/ventenara/logo-tagline.jpg";
 
+import lacocoHero from "../assets/projects/la-coco/hero.jpg";
+import lacocoBag from "../assets/projects/la-coco/mockup-bag.jpg";
+import lacocoBox from "../assets/projects/la-coco/mockup-box.jpg";
+import lacocoSticker from "../assets/projects/la-coco/sticker.jpg";
+import lacocoCupwrap from "../assets/projects/la-coco/cupwrap.jpg";
+import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
+
 const projects = [
   {
     id: "baroque-bougies",
@@ -71,6 +78,24 @@ const projects = [
     images: {
       hero: ventenaraHero,
       gallery: [ventenaraTagline],
+    },
+  },
+  {
+    id: "la-coco",
+    name: "La Coco",
+    category: "Branding",
+    tags: ["Branding", "Packaging", "Logo Design"],
+    year: "2024",
+    teaser: "Tropical branding and packaging for a milkshake and pancake house",
+    description:
+      "La Coco is a vibrant brand identity for a milkshake and pancake business built around the tagline 'Feel The Flavor.' The visual system features a playful serif logotype with a coconut icon integrated into the letterform, a custom tropical palm leaf pattern, and a fresh teal color palette that evokes island breezes and coconut-forward indulgence. The brand extends across packaging — gift boxes with branded ribbon, shopping bags, cup wraps, and round stickers — creating a cohesive, fun, and instantly recognizable presence.",
+    client: "La Coco",
+    services: ["Brand Identity", "Logo Design", "Packaging Design", "Pattern Design"],
+    tools: ["Illustrator", "Photoshop"],
+    link: null,
+    images: {
+      hero: lacocoHero,
+      gallery: [lacocoBag, lacocoBox, lacocoSticker, lacocoCupwrap, lacocoLogo],
     },
   },
   {

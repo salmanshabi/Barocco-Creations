@@ -1,4 +1,29 @@
 const patterns = {
+  "la-coco": (
+    <>
+      {/* Palm frond radiating lines */}
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <g key={i}>
+          <line
+            x1={100 + i * 90}
+            y1={350}
+            x2={80 + i * 90}
+            y2={150}
+            stroke="rgba(200,168,130,0.06)"
+            strokeWidth="0.8"
+          />
+          <line
+            x1={100 + i * 90}
+            y1={350}
+            x2={120 + i * 90}
+            y2={150}
+            stroke="rgba(200,168,130,0.06)"
+            strokeWidth="0.8"
+          />
+        </g>
+      ))}
+    </>
+  ),
   "ventenara": (
     <>
       {/* Radial petal burst */}

@@ -8,6 +8,14 @@ import baroqueStationery from "../assets/projects/baroque-bougies/mockup5.jpg";
 import baroqueSign from "../assets/projects/baroque-bougies/mockup6.jpg";
 import baroqueApron from "../assets/projects/baroque-bougies/mockup7.jpg";
 
+import miraHero from "../assets/projects/mira-skincare/hero.jpg";
+import miraBusinesscard from "../assets/projects/mira-skincare/businesscard.jpg";
+import miraEnvelope from "../assets/projects/mira-skincare/envelope.jpg";
+import miraProducts from "../assets/projects/mira-skincare/products.jpg";
+import miraLogovariations from "../assets/projects/mira-skincare/logovariations.jpg";
+import miraColors from "../assets/projects/mira-skincare/colors.jpg";
+import miraPattern from "../assets/projects/mira-skincare/pattern.jpg";
+
 const projects = [
   {
     id: "baroque-bougies",
@@ -25,6 +33,24 @@ const projects = [
     images: {
       hero: baroqueHero,
       gallery: [baroqueMockup1, baroqueMockup3, baroqueMockup2, baroqueMockup4, baroqueEnvelope, baroqueStationery, baroqueSign, baroqueApron],
+    },
+  },
+  {
+    id: "mira-skincare",
+    name: "Mira Skincare & Beauty",
+    category: "Branding",
+    tags: ["Branding", "Packaging", "Logo Design"],
+    year: "2024",
+    teaser: "A soft, feminine brand identity for a skincare salon and dermatology studio",
+    description:
+      "Mira Skincare & Beauty is a brand identity designed for a salon specializing in facials, skincare products, and dermatology services. The visual system centers on a custom logotype with fluid, organic letterforms — evoking softness and care. A muted mauve and blush palette, paired with a bespoke wave pattern, carries across all touchpoints: product packaging, business collateral, and branded materials. The result is a brand that feels luxurious yet approachable.",
+    client: "Mira Skincare & Beauty",
+    services: ["Brand Identity", "Logo Design", "Packaging Design", "Business Collateral", "Pattern Design"],
+    tools: ["Illustrator", "Photoshop"],
+    link: null,
+    images: {
+      hero: miraHero,
+      gallery: [miraProducts, miraBusinesscard, miraEnvelope, miraLogovariations, miraColors, miraPattern],
     },
   },
   {

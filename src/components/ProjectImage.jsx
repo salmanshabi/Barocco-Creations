@@ -1,4 +1,18 @@
 const patterns = {
+  "mira-skincare": (
+    <>
+      {/* Flowing wave curves */}
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <path
+          key={i}
+          d={`M0,${80 + i * 70} Q150,${50 + i * 70} 300,${90 + i * 70} T600,${80 + i * 70}`}
+          fill="none"
+          stroke="rgba(200,168,130,0.07)"
+          strokeWidth="0.8"
+        />
+      ))}
+    </>
+  ),
   "barocco-creations": (
     <>
       {/* Concentric arcs */}

@@ -2,11 +2,11 @@
 
 @theme {
   --color-olive-dark: #131518;
-  --color-olive-base: #1A1C22;
-  --color-olive-mid: #24262E;
-  --color-sand: #C8A882;
-  --color-slate: #7A9BAA;
-  --color-cream: #E8E2D5;
+  --color-olive-base: #1a1c22;
+  --color-olive-mid: #24262e;
+  --color-sand: #c8a882;
+  --color-slate: #7a9baa;
+  --color-cream: #e8e2d5;
 
   --font-cormorant: "Cormorant Garamond", serif;
   --font-jost: "Jost", sans-serif;
@@ -16,13 +16,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
   background-color: #131518;
-  color: #E8E2D5;
+  color: #e8e2d5;
   font-family: "Jost", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -49,8 +50,12 @@ body {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 .animate-marquee {
   animation: marquee 30s linear infinite;
@@ -60,28 +65,47 @@ body {
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse-line {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 ::selection {
   background-color: rgba(200, 168, 130, 0.25);
-  color: #E8E2D5;
+  color: #e8e2d5;
 }
 
 /* Hide scrollbar for horizontal galleries */
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* Subtle noise overlay for depth */
 body::after {

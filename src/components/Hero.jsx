@@ -17,7 +17,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden">
+    <section className="relative flex w-full min-h-screen flex-col justify-between overflow-hidden">
       {/* Subtle grid background */}
       <div className="pointer-events-none absolute inset-0">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">

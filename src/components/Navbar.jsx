@@ -12,11 +12,25 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 40);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -45,6 +59,8 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ${
+          visible ? "translate-y-0" : "-translate-y-full"
+        } ${
           scrolled
             ? "border-b border-sand/10 bg-olive-dark/90 backdrop-blur-xl"
             : "bg-transparent"

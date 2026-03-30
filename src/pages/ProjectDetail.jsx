@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import projects from "../data/projects";
 import ProjectImage from "../components/ProjectImage";
+import NexoraBackground from "../components/NexoraBackground";
 
 const defaultTheme = {
   bg: "#131518",
@@ -25,6 +26,8 @@ export default function ProjectDetail() {
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const nextNum = String(((projectIndex + 1) % projects.length) + 1).padStart(2, "0");
 
+  const isNexora = project.id === "nexora-ai";
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -32,8 +35,15 @@ export default function ProjectDetail() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       className="min-h-screen"
-      style={{ backgroundColor: t.bg }}
+      style={{ backgroundColor: t.bg, position: "relative" }}
     >
+      {/* Nexora AI — interactive animated particle background */}
+      {isNexora && (
+        <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
+          <NexoraBackground />
+        </div>
+      )}
+
       {/* Full-bleed hero */}
       <div className="relative h-[60vh] w-full overflow-hidden">
         {project.images?.hero ? (

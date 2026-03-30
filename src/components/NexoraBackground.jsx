@@ -21,9 +21,9 @@ export default function NexoraBackground() {
     const mouse = { x: -1000, y: -1000, isClicked: false };
 
     const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top + window.scrollY;
+      // e.pageX/pageY = document coords; canvas starts at page origin
+      mouse.x = e.pageX;
+      mouse.y = e.pageY;
     };
     const handleMouseLeave = () => {
       mouse.x = -1000;
@@ -37,7 +37,8 @@ export default function NexoraBackground() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
-    parent.addEventListener("mouseleave", handleMouseLeave);
+    // Use document for mouseleave — parent has pointer-events:none so fires instantly
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     class Particle {
       constructor() {
@@ -209,7 +210,7 @@ export default function NexoraBackground() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      parent.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

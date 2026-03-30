@@ -20,25 +20,45 @@ export default function NexoraBackground() {
 
     const mouse = { x: -1000, y: -1000, isClicked: false };
 
+    // ── Mouse events ──────────────────────────────────────────
     const handleMouseMove = (e) => {
-      // e.pageX/pageY = document coords; canvas starts at page origin
       mouse.x = e.pageX;
       mouse.y = e.pageY;
     };
+    const handleMouseDown = () => { mouse.isClicked = true; };
+    const handleMouseUp   = () => { mouse.isClicked = false; };
+    // Reset only when cursor genuinely leaves the browser
     const handleMouseLeave = () => {
       mouse.x = -1000;
       mouse.y = -1000;
       mouse.isClicked = false;
     };
-    const handleMouseDown = () => { mouse.isClicked = true; };
-    const handleMouseUp = () => { mouse.isClicked = false; };
+
+    // ── Touch events ──────────────────────────────────────────
+    const handleTouchMove = (e) => {
+      // Don't preventDefault — let the page scroll normally
+      const t = e.touches[0];
+      if (!t) return;
+      mouse.x = t.pageX;
+      mouse.y = t.pageY;
+      mouse.isClicked = true; // treat active touch like a click
+    };
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+      mouse.isClicked = false;
+    };
+
+    window.addEventListener("mousemove",  handleMouseMove,  { passive: true });
+    window.addEventListener("mousedown",  handleMouseDown,  { passive: true });
+    window.addEventListener("mouseup",    handleMouseUp,    { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    window.addEventListener("touchmove",  handleTouchMove,  { passive: true });
+    window.addEventListener("touchend",   handleTouchEnd,   { passive: true });
+    window.addEventListener("touchcancel",handleTouchEnd,   { passive: true });
 
     const parent = canvas.parentElement;
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    // Use document for mouseleave — parent has pointer-events:none so fires instantly
-    document.addEventListener("mouseleave", handleMouseLeave);
 
     class Particle {
       constructor() {
@@ -59,7 +79,7 @@ export default function NexoraBackground() {
         this.angle += 0.05;
         this.radius = this.baseRadius + Math.sin(this.angle) * 0.5;
 
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
         const dx = mouse.x - this.x;
@@ -67,8 +87,8 @@ export default function NexoraBackground() {
         const distance = Math.sqrt(dx * dx + dy * dy);
         const repelDist = mouse.isClicked ? mouseRepelDistance * 2.5 : mouseRepelDistance;
 
-        if (distance < repelDist) {
-          const force = (repelDist - distance) / repelDist;
+        if (distance > 0 && distance < repelDist) {
+          const force    = (repelDist - distance) / repelDist;
           const strength = mouse.isClicked ? 15 : 3;
           this.x -= (dx / distance) * force * strength;
           this.y -= (dy / distance) * force * strength;
@@ -124,14 +144,22 @@ export default function NexoraBackground() {
       }
     }
 
+    const isMobile = () => window.innerWidth < 768;
+
     const initParticles = () => {
       particles = [];
       shootingStars = [];
-      const count = Math.min(Math.max(Math.floor((canvas.width * canvas.height) / 12000), 40), 100);
+      // Fewer particles on mobile for smooth performance
+      const base  = isMobile() ? 8000 : 12000;
+      const min   = isMobile() ? 25   : 40;
+      const max   = isMobile() ? 55   : 100;
+      const count = Math.min(Math.max(Math.floor((canvas.width * canvas.height) / base), min), max);
       for (let i = 0; i < count; i++) particles.push(new Particle());
     };
 
     const drawConnections = () => {
+      const hasPointer = mouse.x > 0 && mouse.y > 0;
+
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -147,9 +175,9 @@ export default function NexoraBackground() {
           }
         }
 
-        if (mouse.x > 0 && mouse.y > 0) {
-          const mdx = particles[i].x - mouse.x;
-          const mdy = particles[i].y - mouse.y;
+        if (hasPointer) {
+          const mdx   = particles[i].x - mouse.x;
+          const mdy   = particles[i].y - mouse.y;
           const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
           if (mDist < mouseConnectionDistance) {
             ctx.beginPath();
@@ -186,7 +214,7 @@ export default function NexoraBackground() {
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, mouse.isClicked ? 5 : 2, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-        ctx.shadowBlur = mouse.isClicked ? 20 : 10;
+        ctx.shadowBlur  = mouse.isClicked ? 20 : 10;
         ctx.shadowColor = "rgba(0, 212, 200, 1)";
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -196,21 +224,24 @@ export default function NexoraBackground() {
     };
 
     const resizeCanvas = () => {
-      canvas.width = parent.offsetWidth;
+      canvas.width  = parent.offsetWidth;
       canvas.height = parent.offsetHeight;
       initParticles();
     };
 
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", resizeCanvas, { passive: true });
     resizeCanvas();
     animate();
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("resize",      resizeCanvas);
+      window.removeEventListener("mousemove",   handleMouseMove);
+      window.removeEventListener("mousedown",   handleMouseDown);
+      window.removeEventListener("mouseup",     handleMouseUp);
+      document.removeEventListener("mouseleave",handleMouseLeave);
+      window.removeEventListener("touchmove",   handleTouchMove);
+      window.removeEventListener("touchend",    handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

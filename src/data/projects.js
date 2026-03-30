@@ -37,6 +37,7 @@ import eunoiaHero from "../assets/projects/studio-eunoia/hero.jpg";
 import eunoiaLogo from "../assets/projects/studio-eunoia/logo.jpg";
 import eunoiaBox from "../assets/projects/studio-eunoia/psd-2.jpg";
 import eunoiaSocial from "../assets/projects/studio-eunoia/psd-1.jpg";
+import eunoiaBusinesscard from "../assets/projects/studio-eunoia/businesscard.jpg";
 
 import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
 import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
@@ -167,8 +168,8 @@ const projects = [
     tools: ["Illustrator", "Photoshop", "InDesign"],
     link: null,
     images: {
-      hero: eunoiaHero,
-      gallery: [eunoiaLogo, eunoiaBox, eunoiaSocial],
+      hero: eunoiaLogo,
+      gallery: [eunoiaHero, eunoiaBusinesscard, eunoiaBox, eunoiaSocial],
     },
   },
   {

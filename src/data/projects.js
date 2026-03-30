@@ -28,22 +28,11 @@ import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 import herbalookHero from "../assets/projects/herbalook-catalogue/hero-new.jpg";
 
 import nexoraHero from "../assets/projects/nexora-ai/hero.jpg";
-import nexoraTemplates from "../assets/projects/nexora-ai/templates.jpg";
-import nexoraAbout from "../assets/projects/nexora-ai/about.jpg";
-import nexoraPricing from "../assets/projects/nexora-ai/pricing.jpg";
-import nexoraSignin from "../assets/projects/nexora-ai/signin.jpg";
-import nexoraTemplatesPage from "../assets/projects/nexora-ai/templates-page.jpg";
 import eunoiaHero from "../assets/projects/studio-eunoia/hero.jpg";
 import eunoiaLogo from "../assets/projects/studio-eunoia/logo.jpg";
 import eunoiaBox from "../assets/projects/studio-eunoia/psd-2.jpg";
 import eunoiaSocial from "../assets/projects/studio-eunoia/psd-1.jpg";
 import eunoiaBusinesscard from "../assets/projects/studio-eunoia/businesscard.jpg";
-
-import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
-import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
-import herbalookSoap from "../assets/projects/herbalook-catalogue/soap.jpg";
-import herbalookPipore from "../assets/projects/herbalook-catalogue/pipore.jpg";
-import herbalookMateCups from "../assets/projects/herbalook-catalogue/mate-cups.jpg";
 
 const projects = [
   {
@@ -178,7 +167,7 @@ const projects = [
     },
     images: {
       hero: herbalookHero,
-      gallery: [herbalookLogo, herbalookProductSet, herbalookMateCups, herbalookPipore, herbalookSoap],
+      gallery: [],
     },
   },
   {
@@ -205,7 +194,7 @@ const projects = [
     },
     images: {
       hero: nexoraHero,
-      gallery: [nexoraHero, nexoraTemplates, nexoraAbout, nexoraPricing, nexoraSignin, nexoraTemplatesPage],
+      gallery: [],
     },
   },
   {

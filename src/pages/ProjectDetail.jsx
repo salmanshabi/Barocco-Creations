@@ -189,6 +189,7 @@ export default function ProjectDetail() {
       </div>
 
       {/* Horizontal scroll gallery */}
+      {project.images?.gallery?.length > 0 && (
       <div className="py-10">
         <h3
           className="mb-8 px-6 font-mono text-[10px] uppercase tracking-[0.3em] md:px-12"
@@ -231,6 +232,7 @@ export default function ProjectDetail() {
           )}
         </div>
       </div>
+      )}
 
       {/* Live interactive website embed */}
       {project.link && (

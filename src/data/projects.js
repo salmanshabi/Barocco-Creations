@@ -27,7 +27,11 @@ import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 
 import herbalookHero from "../assets/projects/herbalook-catalogue/hero-new.jpg";
 
-import nexoraTemplatesNew from "../assets/projects/nexora-ai/templates-new.jpg";
+import nexoraHero from "../assets/projects/nexora-ai/hero.jpg";
+import nexoraTemplates from "../assets/projects/nexora-ai/templates.jpg";
+import nexoraAbout from "../assets/projects/nexora-ai/about.jpg";
+import nexoraPricing from "../assets/projects/nexora-ai/pricing.jpg";
+import nexoraSignin from "../assets/projects/nexora-ai/signin.jpg";
 import nexoraTemplatesPage from "../assets/projects/nexora-ai/templates-page.jpg";
 import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
 import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
@@ -140,8 +144,8 @@ const projects = [
     tools: ["Next.js", "React", "Tailwind CSS", "Prisma", "Stripe", "NextAuth", "Vercel", "Framer Motion"],
     link: null,
     images: {
-      hero: nexoraTemplatesNew,
-      gallery: [nexoraTemplatesNew, nexoraTemplatesPage],
+      hero: nexoraHero,
+      gallery: [nexoraHero, nexoraTemplates, nexoraAbout, nexoraPricing, nexoraSignin, nexoraTemplatesPage],
     },
   },
   {

@@ -33,6 +33,11 @@ import nexoraAbout from "../assets/projects/nexora-ai/about.jpg";
 import nexoraPricing from "../assets/projects/nexora-ai/pricing.jpg";
 import nexoraSignin from "../assets/projects/nexora-ai/signin.jpg";
 import nexoraTemplatesPage from "../assets/projects/nexora-ai/templates-page.jpg";
+import eunoiaHero from "../assets/projects/studio-eunoia/hero.jpg";
+import eunoiaLogo from "../assets/projects/studio-eunoia/logo.jpg";
+import eunoiaBox from "../assets/projects/studio-eunoia/psd-2.jpg";
+import eunoiaSocial from "../assets/projects/studio-eunoia/psd-1.jpg";
+
 import herbalookLogo from "../assets/projects/herbalook-catalogue/logo.jpg";
 import herbalookProductSet from "../assets/projects/herbalook-catalogue/product-set.jpg";
 import herbalookSoap from "../assets/projects/herbalook-catalogue/soap.jpg";
@@ -146,6 +151,24 @@ const projects = [
     images: {
       hero: nexoraHero,
       gallery: [nexoraHero, nexoraTemplates, nexoraAbout, nexoraPricing, nexoraSignin, nexoraTemplatesPage],
+    },
+  },
+  {
+    id: "studio-eunoia",
+    name: "Studio Eunoia",
+    category: "Branding",
+    tags: ["Branding", "Packaging", "Visual Identity"],
+    year: "2025",
+    teaser: "A refined brand identity for a modern accessories and jewelry house",
+    description:
+      "Studio Eunoia is a full brand identity and visual system designed for a contemporary accessories business. The name — from the Greek word for 'beautiful thinking' — informed every design decision. The identity pairs classical serif typography with a gold olive branch monogram, creating a mark that evokes timeless craftsmanship. The visual system extends across packaging (teal jewelry boxes with gold foil stamping, branded pouches), social media templates, and product photography direction. The color palette balances deep teal, warm gold, and travertine neutrals to reflect the brand's position between heritage elegance and modern minimalism.",
+    client: "Studio Eunoia",
+    services: ["Brand Strategy", "Visual Identity", "Logo Design", "Packaging Design", "Social Media Design"],
+    tools: ["Illustrator", "Photoshop", "InDesign"],
+    link: null,
+    images: {
+      hero: eunoiaHero,
+      gallery: [eunoiaLogo, eunoiaBox, eunoiaSocial],
     },
   },
   {

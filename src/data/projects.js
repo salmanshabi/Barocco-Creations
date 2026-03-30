@@ -142,7 +142,7 @@ const projects = [
     client: "Self-initiated",
     services: ["Full-Stack Development", "AI Integration", "UX/UI Design", "Product Design"],
     tools: ["Next.js", "React", "Tailwind CSS", "Prisma", "Stripe", "NextAuth", "Vercel", "Framer Motion"],
-    link: null,
+    link: "https://nexora-kohl-one.vercel.app",
     images: {
       hero: nexoraHero,
       gallery: [nexoraHero, nexoraTemplates, nexoraAbout, nexoraPricing, nexoraSignin, nexoraTemplatesPage],

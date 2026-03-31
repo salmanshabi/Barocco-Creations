@@ -33,7 +33,7 @@ export default function MiraBackground() {
 
       const x = current.x;
       const y = current.y;
-      const r = Math.max(canvas.width, canvas.height) * 0.45;
+      const r = Math.max(canvas.width, canvas.height) * 0.22;
 
       // Primary mauve glow
       const grad = ctx.createRadialGradient(x, y, 0, x, y, r);

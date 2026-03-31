@@ -71,20 +71,6 @@ export default function EunoiaBackground() {
         smooth.x = -9999; smooth.y = -9999;
       }
 
-      // Warm gold cursor glow
-      if (smooth.x > -999) {
-        const gr = 150;
-        const grd = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, gr);
-        grd.addColorStop(0, "rgba(196,162,101,0.12)");
-        grd.addColorStop(0.4, "rgba(196,162,101,0.06)");
-        grd.addColorStop(0.7, "rgba(224,204,154,0.02)");
-        grd.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.beginPath();
-        ctx.arc(smooth.x, smooth.y, gr, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-      }
-
       for (let i = 0; i < sparkles.length; i++) {
         const s = sparkles[i];
 

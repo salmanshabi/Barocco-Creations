@@ -11,6 +11,8 @@ import VentenaraBackground from "../components/VentenaraBackground";
 import VentenaraOrnament from "../components/VentenaraOrnament";
 import LaCocoBackground from "../components/LaCocoBackground";
 import LaCocoOrnament from "../components/LaCocoOrnament";
+import EunoiaBackground from "../components/EunoiaBackground";
+import EunoiaOrnament from "../components/EunoiaOrnament";
 
 const defaultTheme = {
   bg: "#131518",
@@ -39,6 +41,7 @@ export default function ProjectDetail() {
   const isMira = project.id === "mira-skincare";
   const isVentenara = project.id === "ventenara";
   const isLaCoco = project.id === "la-coco";
+  const isEunoia = project.id === "studio-eunoia";
 
   return (
     <motion.main
@@ -54,6 +57,19 @@ export default function ProjectDetail() {
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
           <NexoraBackground />
         </div>
+      )}
+
+      {/* Studio Eunoia — jewelry shimmer + warm vignette */}
+      {isEunoia && (
+        <>
+          <EunoiaBackground />
+          <div
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse 55% 45% at 50% 40%, rgba(196,162,101,0.03) 0%, transparent 55%), radial-gradient(ellipse 100% 100% at 50% 50%, transparent 35%, rgba(20,18,16,0.5) 100%)`,
+            }}
+          />
+        </>
       )}
 
       {/* La Coco — tropical bubbles + teal vignette */}
@@ -200,6 +216,10 @@ export default function ProjectDetail() {
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <BaroqueOrnament color={`${t.accent}88`} delay={0.3} />
         </div>
+      ) : isEunoia ? (
+        <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <EunoiaOrnament color={`${t.accent}55`} delay={0.3} />
+        </div>
       ) : isLaCoco ? (
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <LaCocoOrnament color={`${t.accent}55`} delay={0.3} />
@@ -329,6 +349,50 @@ export default function ProjectDetail() {
             </div>
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <BaroqueOrnament color={`${t.accent}33`} delay={0} />
+            </div>
+          </>
+        ) : isEunoia ? (
+          <>
+            {/* Studio Eunoia — masonry jewelry showcase */}
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <EunoiaOrnament color={`${t.accent}33`} delay={0.5} />
+              <h3
+                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                style={{ color: `${t.accentLight}88` }}
+              >
+                Visual Identity
+              </h3>
+            </div>
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <div className="columns-1 gap-5 md:columns-2">
+                {project.images.gallery.map((src, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.92, y: 30 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.1 * i,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                    className="mb-5 overflow-hidden rounded-sm"
+                    style={{
+                      border: `1px solid ${t.border}`,
+                      boxShadow: `0 8px 32px rgba(196,162,101,0.06), 0 2px 8px rgba(0,0,0,0.2)`,
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.name} — ${i + 1}`}
+                      className="w-full object-contain"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            <div className="mx-auto max-w-6xl px-6 pt-8 md:px-12 lg:px-20">
+              <EunoiaOrnament color={`${t.accent}22`} delay={0} />
             </div>
           </>
         ) : isLaCoco ? (

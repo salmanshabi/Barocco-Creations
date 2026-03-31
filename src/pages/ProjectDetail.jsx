@@ -323,51 +323,29 @@ export default function ProjectDetail() {
                 Brand Identity
               </h3>
             </div>
+            {/* Masonry columns — handles mixed aspect ratios naturally */}
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-              {/* Feature image — full width */}
-              {project.images.gallery[0] && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="mb-6 overflow-hidden rounded-sm"
-                  style={{
-                    border: `1px solid ${t.border}`,
-                    boxShadow: `0 12px 48px rgba(201,168,76,0.06), 0 4px 16px rgba(0,0,0,0.25)`,
-                  }}
-                >
-                  <img
-                    src={project.images.gallery[0]}
-                    alt={`${project.name} — 1`}
-                    className="w-full object-contain"
-                  />
-                </motion.div>
-              )}
-
-              {/* Staggered 2-column grid */}
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {project.images.gallery.slice(1).map((src, i) => (
+              <div className="columns-1 gap-5 md:columns-2">
+                {project.images.gallery.map((src, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.92, y: 30 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{
                       duration: 0.7,
-                      delay: 0.08 * i,
+                      delay: 0.1 * i,
                       ease: [0.25, 0.46, 0.45, 0.94],
                     }}
-                    className="overflow-hidden rounded-sm"
+                    className="mb-5 overflow-hidden rounded-sm"
                     style={{
                       border: `1px solid ${t.border}`,
-                      boxShadow: `0 8px 32px rgba(201,168,76,0.06), 0 2px 8px rgba(0,0,0,0.15)`,
-                      marginTop: i % 2 === 1 ? "2.5rem" : "0",
+                      boxShadow: `0 8px 32px rgba(201,168,76,0.06), 0 2px 8px rgba(0,0,0,0.2)`,
                     }}
                   >
                     <img
                       src={src}
-                      alt={`${project.name} — ${i + 2}`}
+                      alt={`${project.name} — ${i + 1}`}
                       className="w-full object-contain"
                     />
                   </motion.div>

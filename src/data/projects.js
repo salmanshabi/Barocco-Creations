@@ -28,8 +28,6 @@ import ventenaraWatchBox from "../assets/projects/ventenara/watch-box.jpg";
 import lacocoHero from "../assets/projects/la-coco/hero.jpg";
 import lacocoBag from "../assets/projects/la-coco/mockup-bag.jpg";
 import lacocoBox from "../assets/projects/la-coco/mockup-box.jpg";
-import lacocoSticker from "../assets/projects/la-coco/sticker.jpg";
-import lacocoCupwrap from "../assets/projects/la-coco/cupwrap.jpg";
 import lacocoLogo from "../assets/projects/la-coco/logo-white.jpg";
 
 import herbalookHero from "../assets/projects/herbalook-catalogue/hero-new.jpg";
@@ -147,7 +145,7 @@ const projects = [
     },
     images: {
       hero: lacocoHero,
-      gallery: [lacocoBag, lacocoBox, lacocoSticker, lacocoCupwrap, lacocoLogo],
+      gallery: [lacocoBag, lacocoBox, lacocoLogo],
     },
   },
   {

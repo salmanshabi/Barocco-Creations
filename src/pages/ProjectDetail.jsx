@@ -7,6 +7,8 @@ import BaroqueBackground from "../components/BaroqueBackground";
 import BaroqueOrnament from "../components/BaroqueOrnament";
 import MiraBackground from "../components/MiraBackground";
 import MiraWaveDivider from "../components/MiraWaveDivider";
+import VentenaraBackground from "../components/VentenaraBackground";
+import VentenaraOrnament from "../components/VentenaraOrnament";
 
 const defaultTheme = {
   bg: "#131518",
@@ -33,6 +35,7 @@ export default function ProjectDetail() {
   const isNexora = project.id === "nexora-ai";
   const isBaroque = project.id === "baroque-bougies";
   const isMira = project.id === "mira-skincare";
+  const isVentenara = project.id === "ventenara";
 
   return (
     <motion.main
@@ -48,6 +51,19 @@ export default function ProjectDetail() {
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
           <NexoraBackground />
         </div>
+      )}
+
+      {/* Ventenara — floating gold dust + deep navy vignette */}
+      {isVentenara && (
+        <>
+          <VentenaraBackground />
+          <div
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse 55% 45% at 50% 40%, rgba(201,168,76,0.03) 0%, transparent 55%), radial-gradient(ellipse 100% 100% at 50% 50%, transparent 35%, rgba(12,16,32,0.5) 100%)`,
+            }}
+          />
+        </>
       )}
 
       {/* Mira Skincare — dreamy flowing orb background + soft vignette */}
@@ -167,6 +183,10 @@ export default function ProjectDetail() {
       {isBaroque ? (
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <BaroqueOrnament color={`${t.accent}88`} delay={0.3} />
+        </div>
+      ) : isVentenara ? (
+        <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <VentenaraOrnament color={`${t.accent}66`} delay={0.3} />
         </div>
       ) : isMira ? (
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
@@ -289,6 +309,48 @@ export default function ProjectDetail() {
             </div>
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <BaroqueOrnament color={`${t.accent}33`} delay={0} />
+            </div>
+          </>
+        ) : isVentenara ? (
+          <>
+            {/* Ventenara — grand centered showcase */}
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <VentenaraOrnament color={`${t.accent}33`} delay={0.5} />
+              <h3
+                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                style={{ color: `${t.accentLight}88` }}
+              >
+                Brand Identity
+              </h3>
+            </div>
+            <div className="mx-auto max-w-4xl px-6 md:px-12 lg:px-20">
+              {project.images.gallery.map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.1 * i,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  className="mb-8 overflow-hidden rounded-sm"
+                  style={{
+                    border: `1px solid ${t.border}`,
+                    boxShadow: `0 12px 48px rgba(201,168,76,0.06), 0 4px 16px rgba(0,0,0,0.25)`,
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt={`${project.name} — ${i + 1}`}
+                    className="w-full object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
+            <div className="mx-auto max-w-6xl px-6 pt-4 md:px-12 lg:px-20">
+              <VentenaraOrnament color={`${t.accent}22`} delay={0} />
             </div>
           </>
         ) : isMira ? (

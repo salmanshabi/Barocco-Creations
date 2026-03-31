@@ -49,8 +49,8 @@ export default function MiraBackground() {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           r: 150 + Math.random() * 300,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.25,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: (Math.random() - 0.5) * 0.08,
           color: ORB_COLORS[i % ORB_COLORS.length],
           phase: Math.random() * Math.PI * 2,
           breathSpeed: 0.004 + Math.random() * 0.005,
@@ -95,8 +95,8 @@ export default function MiraBackground() {
         const dx = orb.x - mouse.x;
         const dy = orb.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 400) {
-          const force = ((400 - dist) / 400) * 0.6;
+        if (dist < 350) {
+          const force = ((350 - dist) / 350) * 0.2;
           orb.x += (dx / dist) * force;
           orb.y += (dy / dist) * force;
         }

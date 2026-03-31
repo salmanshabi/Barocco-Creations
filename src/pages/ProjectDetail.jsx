@@ -5,6 +5,8 @@ import ProjectImage from "../components/ProjectImage";
 import NexoraBackground from "../components/NexoraBackground";
 import BaroqueBackground from "../components/BaroqueBackground";
 import BaroqueOrnament from "../components/BaroqueOrnament";
+import MiraBackground from "../components/MiraBackground";
+import MiraWaveDivider from "../components/MiraWaveDivider";
 
 const defaultTheme = {
   bg: "#131518",
@@ -30,6 +32,7 @@ export default function ProjectDetail() {
 
   const isNexora = project.id === "nexora-ai";
   const isBaroque = project.id === "baroque-bougies";
+  const isMira = project.id === "mira-skincare";
 
   return (
     <motion.main
@@ -45,6 +48,19 @@ export default function ProjectDetail() {
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
           <NexoraBackground />
         </div>
+      )}
+
+      {/* Mira Skincare — dreamy flowing orb background + soft vignette */}
+      {isMira && (
+        <>
+          <MiraBackground />
+          <div
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse 60% 50% at 50% 40%, rgba(196,132,154,0.04) 0%, transparent 60%), radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(26,18,24,0.5) 100%)`,
+            }}
+          />
+        </>
       )}
 
       {/* Baroque Bougies — full-page interactive ember background + vignette */}
@@ -147,10 +163,14 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Accent divider — ornamental flourish for Baroque, simple line for others */}
+      {/* Accent divider — bespoke per project */}
       {isBaroque ? (
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
           <BaroqueOrnament color={`${t.accent}88`} delay={0.3} />
+        </div>
+      ) : isMira ? (
+        <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <MiraWaveDivider color={`${t.accent}55`} delay={0.3} />
         </div>
       ) : (
         <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
@@ -224,7 +244,7 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Gallery — masonry for Baroque, horizontal scroll for others */}
+      {/* Gallery — bespoke layout per project */}
       {project.images?.gallery?.length > 0 && (
       <div className="py-10">
         {isBaroque ? (
@@ -269,6 +289,73 @@ export default function ProjectDetail() {
             </div>
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <BaroqueOrnament color={`${t.accent}33`} delay={0} />
+            </div>
+          </>
+        ) : isMira ? (
+          <>
+            {/* Mira — editorial beauty magazine staggered grid */}
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <MiraWaveDivider color={`${t.accent}33`} delay={0.5} />
+              <h3
+                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                style={{ color: `${t.accentLight}88` }}
+              >
+                Brand Showcase
+              </h3>
+            </div>
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              {/* Feature image — full width */}
+              {project.images.gallery[0] && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="mb-6 overflow-hidden rounded-sm"
+                  style={{
+                    border: `1px solid ${t.border}`,
+                    boxShadow: `0 12px 40px rgba(196,132,154,0.08), 0 2px 12px rgba(0,0,0,0.15)`,
+                  }}
+                >
+                  <img
+                    src={project.images.gallery[0]}
+                    alt={`${project.name} — 1`}
+                    className="w-full object-contain"
+                  />
+                </motion.div>
+              )}
+
+              {/* Staggered 2-column pairs with offset */}
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {project.images.gallery.slice(1).map((src, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.08 * i,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                    className="overflow-hidden rounded-sm"
+                    style={{
+                      border: `1px solid ${t.border}`,
+                      boxShadow: `0 8px 32px rgba(196,132,154,0.06), 0 2px 8px rgba(0,0,0,0.12)`,
+                      marginTop: i % 2 === 1 ? "2.5rem" : "0",
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.name} — ${i + 2}`}
+                      className="w-full object-contain"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            <div className="mx-auto max-w-6xl px-6 pt-8 md:px-12 lg:px-20">
+              <MiraWaveDivider color={`${t.accent}22`} delay={0} />
             </div>
           </>
         ) : (

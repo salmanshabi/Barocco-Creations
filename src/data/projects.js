@@ -17,6 +17,13 @@ import miraColors from "../assets/projects/mira-skincare/colors.jpg";
 
 import ventenaraHero from "../assets/projects/ventenara/hero.jpg";
 import ventenaraTagline from "../assets/projects/ventenara/logo-tagline.jpg";
+import ventenaraBusinesscard from "../assets/projects/ventenara/businesscard.jpg";
+import ventenaraBox from "../assets/projects/ventenara/box.jpg";
+import ventenaraPackaging from "../assets/projects/ventenara/packaging.jpg";
+import ventenaraCollateral from "../assets/projects/ventenara/collateral.jpg";
+import ventenaraPouch from "../assets/projects/ventenara/pouch.jpg";
+import ventenaraLeatherCase from "../assets/projects/ventenara/leather-case.jpg";
+import ventenaraWatchBox from "../assets/projects/ventenara/watch-box.jpg";
 
 import lacocoHero from "../assets/projects/la-coco/hero.jpg";
 import lacocoBag from "../assets/projects/la-coco/mockup-bag.jpg";
@@ -99,8 +106,8 @@ const projects = [
     description:
       "Ventenara is a branding project for an antique products packaging business built around the tagline 'Guarding Eternity.' The logo features an ornate gold chrysanthemum-inspired medallion — a radial bloom of flowing, hand-drawn petals — set against a deep navy backdrop. The wordmark uses an elegant, high-contrast serif with fine hairline strokes that channel classical luxury and timelessness. The identity is designed to evoke heritage, trust, and the meticulous care of preserving objects of value.",
     client: "Ventenara",
-    services: ["Brand Identity", "Logo Design"],
-    tools: ["Illustrator"],
+    services: ["Brand Identity", "Logo Design", "Packaging Design", "Business Collateral"],
+    tools: ["Illustrator", "Photoshop"],
     link: null,
     theme: {
       bg: "#0c1020",
@@ -113,7 +120,7 @@ const projects = [
     },
     images: {
       hero: ventenaraHero,
-      gallery: [ventenaraTagline],
+      gallery: [ventenaraBusinesscard, ventenaraBox, ventenaraPackaging, ventenaraCollateral, ventenaraPouch, ventenaraLeatherCase, ventenaraWatchBox, ventenaraTagline],
     },
   },
   {

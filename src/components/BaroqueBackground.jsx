@@ -107,10 +107,12 @@ export default function BaroqueBackground() {
       }
 
       reset() {
+        // Spawn anywhere across the full canvas
         this.x = Math.random() * canvas.width;
-        this.y = canvas.height + Math.random() * 40;
-        this.vy = -(Math.random() * 0.6 + 0.2);
-        this.vx = (Math.random() - 0.5) * 0.3;
+        this.y = Math.random() * canvas.height;
+        // Gentle drift in any direction, slight upward bias
+        this.vy = -(Math.random() * 0.4 + 0.05) + (Math.random() - 0.5) * 0.2;
+        this.vx = (Math.random() - 0.5) * 0.4;
         this.swayAmplitude = Math.random() * 0.8 + 0.2;
         this.swaySpeed = Math.random() * 0.015 + 0.005;
         this.swayOffset = Math.random() * Math.PI * 2;
@@ -155,7 +157,9 @@ export default function BaroqueBackground() {
         const flicker = Math.sin(time * this.flickerSpeed + this.flickerOffset);
         this.radius = this.baseRadius * (0.7 + flicker * 0.3);
 
-        if (this.life <= 0 || this.y < -20) {
+        const offScreen = this.y < -20 || this.y > canvas.height + 20 ||
+                          this.x < -20 || this.x > canvas.width + 20;
+        if (this.life <= 0 || offScreen) {
           if (this.isBurst) {
             this.dead = true;
           } else {
@@ -223,7 +227,10 @@ export default function BaroqueBackground() {
 
     const initEmbers = () => {
       embers = [];
-      const count = isMobile() ? 35 : 65;
+      // Scale count with page height for consistent density
+      const area = canvas.width * canvas.height;
+      const base = isMobile() ? 50 : 90;
+      const count = Math.min(Math.max(Math.floor(area / 15000), base), 200);
       for (let i = 0; i < count; i++) {
         const ember = new Ember();
         ember.y = Math.random() * canvas.height;

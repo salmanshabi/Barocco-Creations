@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import projects from "../data/projects";
 import ProjectImage from "../components/ProjectImage";
 import NexoraBackground from "../components/NexoraBackground";
+import BaroqueBackground from "../components/BaroqueBackground";
+import BaroqueOrnament from "../components/BaroqueOrnament";
 
 const defaultTheme = {
   bg: "#131518",
@@ -27,6 +29,7 @@ export default function ProjectDetail() {
   const nextNum = String(((projectIndex + 1) % projects.length) + 1).padStart(2, "0");
 
   const isNexora = project.id === "nexora-ai";
+  const isBaroque = project.id === "baroque-bougies";
 
   return (
     <motion.main
@@ -42,6 +45,22 @@ export default function ProjectDetail() {
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
           <NexoraBackground />
         </div>
+      )}
+
+      {/* Baroque Bougies — warm candlelight ember background + vignette */}
+      {isBaroque && (
+        <>
+          <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
+            <BaroqueBackground />
+          </div>
+          {/* Warm candlelight vignette — radial glow from center, dark edges */}
+          <div
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200,140,60,0.06) 0%, transparent 60%), radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(10,10,8,0.4) 100%)`,
+            }}
+          />
+        </>
       )}
 
       {/* Full-bleed hero */}
@@ -127,16 +146,22 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Accent line divider */}
-      <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="h-px origin-left"
-          style={{ backgroundColor: t.accent, opacity: 0.3 }}
-        />
-      </div>
+      {/* Accent divider — ornamental flourish for Baroque, simple line for others */}
+      {isBaroque ? (
+        <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <BaroqueOrnament color={`${t.accent}88`} delay={0.3} />
+        </div>
+      ) : (
+        <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-px origin-left"
+            style={{ backgroundColor: t.accent, opacity: 0.3 }}
+          />
+        </div>
+      )}
 
       {/* Two-column: description + metadata */}
       <div className="px-6 py-20 md:px-12 lg:px-20">
@@ -198,49 +223,81 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Horizontal scroll gallery */}
+      {/* Gallery — masonry for Baroque, horizontal scroll for others */}
       {project.images?.gallery?.length > 0 && (
       <div className="py-10">
-        <h3
-          className="mb-8 px-6 font-mono text-[10px] uppercase tracking-[0.3em] md:px-12"
-          style={{ color: `${t.accent}55` }}
-        >
-          Project Gallery
-        </h3>
-        <div className="flex gap-4 overflow-x-auto px-6 pb-6 md:px-12 scrollbar-hide" style={{ scrollbarWidth: "none" }}>
-          {project.images?.gallery ? (
-            project.images.gallery.map((src, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 * i }}
-                className="shrink-0 overflow-hidden rounded-sm"
-                style={{ border: `1px solid ${t.border}` }}
+        {isBaroque ? (
+          <>
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <BaroqueOrnament color={`${t.accent}44`} delay={0.5} />
+              <h3
+                className="mb-10 text-center font-cormorant text-xl font-light italic tracking-wide"
+                style={{ color: `${t.accentLight}88` }}
               >
-                <img
-                  src={src}
-                  alt={`${project.name} — ${i + 1}`}
-                  className="h-[50vh] w-auto object-contain"
-                />
-              </motion.div>
-            ))
-          ) : (
-            [1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="w-[70vw] shrink-0 overflow-hidden md:w-[45vw] lg:w-[35vw]"
-                style={{ border: `1px solid ${t.border}` }}
-              >
-                <ProjectImage
-                  projectId={project.id}
-                  number={String(i).padStart(2, "0")}
-                  aspect="16/10"
-                />
+                Project Gallery
+              </h3>
+            </div>
+            {/* Masonry grid — luxury unboxing reveal */}
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <div className="columns-1 gap-5 md:columns-2">
+                {project.images.gallery.map((src, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.92, y: 30 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.1 * i,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                    className="mb-5 overflow-hidden rounded-sm"
+                    style={{
+                      border: `1px solid ${t.border}`,
+                      boxShadow: `0 8px 32px rgba(139,45,79,0.08), 0 2px 8px rgba(0,0,0,0.2)`,
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.name} — ${i + 1}`}
+                      className="w-full object-contain"
+                    />
+                  </motion.div>
+                ))}
               </div>
-            ))
-          )}
-        </div>
+            </div>
+            <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
+              <BaroqueOrnament color={`${t.accent}33`} delay={0} />
+            </div>
+          </>
+        ) : (
+          <>
+            <h3
+              className="mb-8 px-6 font-mono text-[10px] uppercase tracking-[0.3em] md:px-12"
+              style={{ color: `${t.accent}55` }}
+            >
+              Project Gallery
+            </h3>
+            <div className="flex gap-4 overflow-x-auto px-6 pb-6 md:px-12 scrollbar-hide" style={{ scrollbarWidth: "none" }}>
+              {project.images.gallery.map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 * i }}
+                  className="shrink-0 overflow-hidden rounded-sm"
+                  style={{ border: `1px solid ${t.border}` }}
+                >
+                  <img
+                    src={src}
+                    alt={`${project.name} — ${i + 1}`}
+                    className="h-[50vh] w-auto object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
       )}
 

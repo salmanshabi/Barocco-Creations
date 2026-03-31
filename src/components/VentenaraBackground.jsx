@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Ventenara — floating gold dust particles.
- * Tiny golden flecks drift slowly downward like precious metal dust
- * settling in a vault, evoking heritage and timelessness.
- * Mouse proximity creates a gentle swirl.
+ * Ventenara — dense gold dust with mouse/touch gold halo.
+ * Many golden flecks drift across the full page. A warm gold radial
+ * glow follows the cursor/touch, illuminating nearby particles.
  */
 export default function VentenaraBackground() {
   const canvasRef = useRef(null);
@@ -15,9 +14,12 @@ export default function VentenaraBackground() {
     const ctx = canvas.getContext("2d");
     let raf;
     let mouse = { x: -9999, y: -9999 };
+    // Smoothed mouse for the halo
+    let smooth = { x: -9999, y: -9999 };
+    const LERP = 0.06;
 
     const particles = [];
-    const COUNT = 60;
+    const COUNT = 140;
 
     function resize() {
       canvas.width = window.innerWidth;
@@ -27,15 +29,14 @@ export default function VentenaraBackground() {
     function makeParticle(randomY) {
       return {
         x: Math.random() * canvas.width,
-        y: randomY ? Math.random() * canvas.height : -10,
-        r: 0.6 + Math.random() * 1.8,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: 0.08 + Math.random() * 0.18,
-        alpha: 0.15 + Math.random() * 0.45,
+        y: randomY ? Math.random() * canvas.height : -10 - Math.random() * 40,
+        r: 0.5 + Math.random() * 2,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: 0.06 + Math.random() * 0.2,
+        alpha: 0.12 + Math.random() * 0.5,
         phase: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.008 + Math.random() * 0.015,
-        // Gold color variation
-        hue: 38 + Math.random() * 12, // 38-50 (gold range)
+        twinkleSpeed: 0.006 + Math.random() * 0.014,
+        hue: 38 + Math.random() * 12,
         sat: 60 + Math.random() * 30,
         lit: 55 + Math.random() * 20,
       };
@@ -51,30 +52,69 @@ export default function VentenaraBackground() {
     function draw(time) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Smooth the halo position
+      if (mouse.x > -999) {
+        if (smooth.x < -999) {
+          smooth.x = mouse.x;
+          smooth.y = mouse.y;
+        } else {
+          smooth.x += (mouse.x - smooth.x) * LERP;
+          smooth.y += (mouse.y - smooth.y) * LERP;
+        }
+      } else {
+        smooth.x = -9999;
+        smooth.y = -9999;
+      }
+
+      // Draw gold halo glow at cursor
+      if (smooth.x > -999) {
+        const haloR = 180;
+        const haloGrad = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, haloR);
+        haloGrad.addColorStop(0, "rgba(201,168,76,0.14)");
+        haloGrad.addColorStop(0.4, "rgba(201,168,76,0.07)");
+        haloGrad.addColorStop(0.7, "rgba(228,213,160,0.03)");
+        haloGrad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.beginPath();
+        ctx.arc(smooth.x, smooth.y, haloR, 0, Math.PI * 2);
+        ctx.fillStyle = haloGrad;
+        ctx.fill();
+      }
+
+      // Draw particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
         // Twinkle
         const twinkle = 0.5 + Math.sin(time * p.twinkleSpeed + p.phase) * 0.5;
-        const alpha = p.alpha * twinkle;
+        let alpha = p.alpha * twinkle;
+
+        // Boost brightness near cursor
+        if (smooth.x > -999) {
+          const dx = p.x - smooth.x;
+          const dy = p.y - smooth.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 200) {
+            const boost = ((200 - dist) / 200) * 0.4;
+            alpha = Math.min(1, alpha + boost);
+          }
+        }
 
         // Drift
         p.x += p.vx;
         p.y += p.vy;
 
-        // Mouse swirl — particles orbit gently around cursor
+        // Gentle swirl near mouse
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 200 && dist > 1) {
+        if (dist < 180 && dist > 1) {
           const angle = Math.atan2(dy, dx);
-          const force = ((200 - dist) / 200) * 0.3;
-          // Tangential push (swirl) + slight outward push
-          p.x += Math.cos(angle + Math.PI / 2) * force + (dx / dist) * force * 0.1;
-          p.y += Math.sin(angle + Math.PI / 2) * force + (dy / dist) * force * 0.1;
+          const force = ((180 - dist) / 180) * 0.25;
+          p.x += Math.cos(angle + Math.PI / 2) * force;
+          p.y += Math.sin(angle + Math.PI / 2) * force;
         }
 
-        // Respawn when off-screen
+        // Respawn
         if (p.y > canvas.height + 20 || p.x < -20 || p.x > canvas.width + 20) {
           particles[i] = makeParticle(false);
           continue;
@@ -86,11 +126,11 @@ export default function VentenaraBackground() {
         ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit}%, ${alpha})`;
         ctx.fill();
 
-        // Soft glow on brighter particles
+        // Glow on brighter particles
         if (alpha > 0.25) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit}%, ${alpha * 0.1})`;
+          ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit}%, ${alpha * 0.12})`;
           ctx.fill();
         }
       }

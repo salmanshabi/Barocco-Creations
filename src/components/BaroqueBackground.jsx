@@ -12,8 +12,57 @@ export default function BaroqueBackground() {
     let animationFrameId;
     let embers = [];
 
-    const parent = canvas.parentElement;
     const isMobile = () => window.innerWidth < 768;
+
+    // Mouse/touch state
+    const mouse = { x: -1000, y: -1000, isDown: false };
+
+    const mouseAttractRadius = 180;
+    const mouseGlowRadius = 120;
+    const burstCount = 8;
+
+    // ── Mouse events ──
+    const handleMouseMove = (e) => {
+      mouse.x = e.pageX;
+      mouse.y = e.pageY;
+    };
+    const handleMouseDown = () => { mouse.isDown = true; spawnBurst(); };
+    const handleMouseUp = () => { mouse.isDown = false; };
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+      mouse.isDown = false;
+    };
+
+    // ── Touch events ──
+    const handleTouchMove = (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      mouse.x = t.pageX;
+      mouse.y = t.pageY;
+    };
+    const handleTouchStart = (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      mouse.x = t.pageX;
+      mouse.y = t.pageY;
+      mouse.isDown = true;
+      spawnBurst();
+    };
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+      mouse.isDown = false;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
     // Warm color palette for candle embers
     const emberColors = [
@@ -24,63 +73,99 @@ export default function BaroqueBackground() {
       { r: 230, g: 180, b: 100 },  // pale flame
     ];
 
+    // Brighter burst colors
+    const burstColors = [
+      { r: 255, g: 200, b: 80 },   // bright flame
+      { r: 255, g: 160, b: 50 },   // hot orange
+      { r: 240, g: 220, b: 130 },  // white-gold
+    ];
+
     class Ember {
-      constructor() {
-        this.reset();
+      constructor(opts) {
+        if (opts) {
+          // Burst ember — starts from a specific position with velocity
+          this.x = opts.x;
+          this.y = opts.y;
+          this.vx = opts.vx;
+          this.vy = opts.vy;
+          this.isBurst = true;
+          this.baseRadius = Math.random() * 3 + 1.5;
+          this.radius = this.baseRadius;
+          this.maxLife = Math.random() * 80 + 40;
+          this.life = this.maxLife;
+          this.flickerSpeed = Math.random() * 0.12 + 0.06;
+          this.flickerOffset = Math.random() * Math.PI * 2;
+          this.color = burstColors[Math.floor(Math.random() * burstColors.length)];
+          this.glowSize = Math.random() * 20 + 12;
+          this.swayAmplitude = 0;
+          this.swaySpeed = 0;
+          this.swayOffset = 0;
+        } else {
+          this.isBurst = false;
+          this.reset();
+        }
       }
 
       reset() {
-        // Embers originate from the lower portion of the canvas
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + Math.random() * 40;
-
-        // Slow upward drift with gentle horizontal sway
         this.vy = -(Math.random() * 0.6 + 0.2);
         this.vx = (Math.random() - 0.5) * 0.3;
-
-        // Sway parameters
         this.swayAmplitude = Math.random() * 0.8 + 0.2;
         this.swaySpeed = Math.random() * 0.015 + 0.005;
         this.swayOffset = Math.random() * Math.PI * 2;
-
-        // Size and life
         this.baseRadius = Math.random() * 2.5 + 0.8;
         this.radius = this.baseRadius;
         this.maxLife = Math.random() * 400 + 200;
         this.life = this.maxLife;
-
-        // Flickering
         this.flickerSpeed = Math.random() * 0.08 + 0.03;
         this.flickerOffset = Math.random() * Math.PI * 2;
-
-        // Color
         this.color = emberColors[Math.floor(Math.random() * emberColors.length)];
-
-        // Glow intensity
         this.glowSize = Math.random() * 15 + 8;
+        this.isBurst = false;
       }
 
       update(time) {
-        // Gentle upward float
+        // Mouse attraction — embers gently drift toward cursor
+        const hasPointer = mouse.x > 0 && mouse.y > 0;
+        if (hasPointer && !this.isBurst) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseAttractRadius && dist > 0) {
+            const strength = mouse.isDown ? 0.04 : 0.015;
+            const force = (1 - dist / mouseAttractRadius) * strength;
+            this.x += dx * force;
+            this.y += dy * force;
+          }
+        }
+
         this.y += this.vy;
         this.x += this.vx + Math.sin(time * this.swaySpeed + this.swayOffset) * this.swayAmplitude * 0.3;
 
-        // Decrease life
+        // Burst embers decelerate and float upward
+        if (this.isBurst) {
+          this.vx *= 0.97;
+          this.vy *= 0.97;
+          this.vy -= 0.01; // slight upward drift
+        }
+
         this.life -= 1;
 
-        // Flicker the radius
         const flicker = Math.sin(time * this.flickerSpeed + this.flickerOffset);
         this.radius = this.baseRadius * (0.7 + flicker * 0.3);
 
-        // Reset when dead or off-screen
         if (this.life <= 0 || this.y < -20) {
-          this.reset();
+          if (this.isBurst) {
+            this.dead = true;
+          } else {
+            this.reset();
+          }
         }
       }
 
       draw(time) {
         const lifeRatio = this.life / this.maxLife;
-        // Fade in during the first 10%, fade out during the last 30%
         let alpha;
         if (lifeRatio > 0.9) {
           alpha = (1 - lifeRatio) / 0.1;
@@ -90,7 +175,6 @@ export default function BaroqueBackground() {
           alpha = 1;
         }
 
-        // Flicker the alpha slightly
         const flicker = Math.sin(time * this.flickerSpeed * 2 + this.flickerOffset);
         alpha *= (0.6 + flicker * 0.4);
         alpha = Math.max(0, Math.min(1, alpha));
@@ -98,18 +182,21 @@ export default function BaroqueBackground() {
         const { r, g, b } = this.color;
 
         // Outer glow
-        const gradient = ctx.createRadialGradient(
-          this.x, this.y, 0,
-          this.x, this.y, this.glowSize * lifeRatio
-        );
-        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.4})`);
-        gradient.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, ${alpha * 0.1})`);
-        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+        const glowR = this.glowSize * lifeRatio;
+        if (glowR > 0.5) {
+          const gradient = ctx.createRadialGradient(
+            this.x, this.y, 0,
+            this.x, this.y, glowR
+          );
+          gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.4})`);
+          gradient.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, ${alpha * 0.1})`);
+          gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.glowSize * lifeRatio, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, glowR, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
 
         // Bright core
         ctx.beginPath();
@@ -119,12 +206,26 @@ export default function BaroqueBackground() {
       }
     }
 
+    // Burst effect — spawn embers radiating from cursor on click/tap
+    function spawnBurst() {
+      if (mouse.x < 0 || mouse.y < 0) return;
+      for (let i = 0; i < burstCount; i++) {
+        const angle = (Math.PI * 2 / burstCount) * i + (Math.random() - 0.5) * 0.5;
+        const speed = Math.random() * 3 + 1.5;
+        embers.push(new Ember({
+          x: mouse.x,
+          y: mouse.y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        }));
+      }
+    }
+
     const initEmbers = () => {
       embers = [];
-      const count = isMobile() ? 30 : 55;
+      const count = isMobile() ? 35 : 65;
       for (let i = 0; i < count; i++) {
         const ember = new Ember();
-        // Stagger initial positions so they don't all start from the bottom
         ember.y = Math.random() * canvas.height;
         ember.life = Math.random() * ember.maxLife;
         embers.push(ember);
@@ -133,9 +234,37 @@ export default function BaroqueBackground() {
 
     let time = 0;
 
+    // Draw warm glow around cursor
+    const drawMouseGlow = () => {
+      if (mouse.x < 0 || mouse.y < 0) return;
+
+      const r = mouse.isDown ? mouseGlowRadius * 1.6 : mouseGlowRadius;
+      const alpha = mouse.isDown ? 0.12 : 0.06;
+
+      const gradient = ctx.createRadialGradient(
+        mouse.x, mouse.y, 0,
+        mouse.x, mouse.y, r
+      );
+      gradient.addColorStop(0, `rgba(200, 140, 60, ${alpha})`);
+      gradient.addColorStop(0.5, `rgba(180, 100, 40, ${alpha * 0.4})`);
+      gradient.addColorStop(1, "rgba(180, 100, 40, 0)");
+
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+    };
+
     const animate = () => {
       time += 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawMouseGlow();
+
+      // Clean up dead burst embers
+      for (let i = embers.length - 1; i >= 0; i--) {
+        if (embers[i].dead) embers.splice(i, 1);
+      }
 
       for (const ember of embers) {
         ember.update(time);
@@ -146,10 +275,26 @@ export default function BaroqueBackground() {
     };
 
     const resizeCanvas = () => {
-      canvas.width = parent.offsetWidth;
-      canvas.height = parent.offsetHeight;
+      // Use the main element (grandparent) scrollHeight for full-page coverage
+      const main = canvas.closest("main");
+      canvas.width = window.innerWidth;
+      canvas.height = main ? main.scrollHeight : document.documentElement.scrollHeight;
       initEmbers();
     };
+
+    // ResizeObserver to track when page content changes height
+    const main = canvas.closest("main");
+    let resizeObserver;
+    if (main && typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        const newH = main.scrollHeight;
+        if (Math.abs(canvas.height - newH) > 50) {
+          canvas.width = window.innerWidth;
+          canvas.height = newH;
+        }
+      });
+      resizeObserver.observe(main);
+    }
 
     window.addEventListener("resize", resizeCanvas, { passive: true });
     resizeCanvas();
@@ -157,6 +302,15 @@ export default function BaroqueBackground() {
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
+      if (resizeObserver) resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -164,8 +318,8 @@ export default function BaroqueBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 z-0"
-      style={{ background: "transparent" }}
+      className="absolute top-0 left-0 z-0"
+      style={{ background: "transparent", width: "100%", pointerEvents: "none" }}
     />
   );
 }

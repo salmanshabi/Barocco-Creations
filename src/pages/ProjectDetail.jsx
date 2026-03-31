@@ -47,21 +47,22 @@ export default function ProjectDetail() {
         </div>
       )}
 
-      {/* Baroque Bougies — warm candlelight ember background + vignette */}
+      {/* Baroque Bougies — full-page interactive ember background + vignette */}
       {isBaroque && (
         <>
-          <div className="absolute inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }}>
-            <BaroqueBackground />
-          </div>
-          {/* Warm candlelight vignette — radial glow from center, dark edges */}
+          <BaroqueBackground />
+          {/* Warm candlelight vignette — fixed overlay that follows the viewport */}
           <div
-            className="absolute inset-0 z-0 pointer-events-none"
+            className="fixed inset-0 z-0 pointer-events-none"
             style={{
               background: `radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200,140,60,0.06) 0%, transparent 60%), radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(10,10,8,0.4) 100%)`,
             }}
           />
         </>
       )}
+
+      {/* All page content — relative z-10 to sit above background canvases */}
+      <div className="relative z-10">
 
       {/* Full-bleed hero */}
       <div className="relative h-[60vh] w-full overflow-hidden">
@@ -439,6 +440,8 @@ export default function ProjectDetail() {
           </p>
         </div>
       </div>
+
+      </div>{/* end content wrapper */}
     </motion.main>
   );
 }

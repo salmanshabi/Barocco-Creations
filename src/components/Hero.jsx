@@ -45,15 +45,15 @@ export default function Hero() {
           {/* Angular bracket frame */}
           <div className="absolute inset-[-40px]" style={{ animation: "spin-slow 40s linear infinite" }}>
             {/* Top-left bracket */}
-            <div className="absolute top-0 left-0 h-7 w-7 border-t border-l border-sand/[0.15]" />
+            <div className="absolute top-0 left-0 h-8 w-8 border-t-2 border-l-2 border-sand/40" />
             {/* Top-right bracket */}
-            <div className="absolute top-0 right-0 h-7 w-7 border-t border-r border-sand/[0.15]" />
+            <div className="absolute top-0 right-0 h-8 w-8 border-t-2 border-r-2 border-sand/40" />
             {/* Bottom-left bracket */}
-            <div className="absolute bottom-0 left-0 h-7 w-7 border-b border-l border-sand/[0.15]" />
+            <div className="absolute bottom-0 left-0 h-8 w-8 border-b-2 border-l-2 border-sand/40" />
             {/* Bottom-right bracket */}
-            <div className="absolute bottom-0 right-0 h-7 w-7 border-b border-r border-sand/[0.15]" />
+            <div className="absolute bottom-0 right-0 h-8 w-8 border-b-2 border-r-2 border-sand/40" />
             {/* Orbiting dot */}
-            <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sand/40" />
+            <div className="absolute -top-[4px] left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-sand/60" />
           </div>
 
           <img

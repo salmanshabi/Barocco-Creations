@@ -45,15 +45,15 @@ export default function Hero() {
           className="relative mb-10"
         >
           {/* Angular bracket frame */}
-          <div className="absolute inset-[-24px]" style={{ animation: "spin-slow 40s linear infinite" }}>
+          <div className="absolute inset-[-40px]" style={{ animation: "spin-slow 40s linear infinite" }}>
             {/* Top-left bracket */}
-            <div className="absolute top-0 left-0 h-5 w-5 border-t border-l border-sand/[0.15]" />
+            <div className="absolute top-0 left-0 h-7 w-7 border-t border-l border-sand/[0.15]" />
             {/* Top-right bracket */}
-            <div className="absolute top-0 right-0 h-5 w-5 border-t border-r border-sand/[0.15]" />
+            <div className="absolute top-0 right-0 h-7 w-7 border-t border-r border-sand/[0.15]" />
             {/* Bottom-left bracket */}
-            <div className="absolute bottom-0 left-0 h-5 w-5 border-b border-l border-sand/[0.15]" />
+            <div className="absolute bottom-0 left-0 h-7 w-7 border-b border-l border-sand/[0.15]" />
             {/* Bottom-right bracket */}
-            <div className="absolute bottom-0 right-0 h-5 w-5 border-b border-r border-sand/[0.15]" />
+            <div className="absolute bottom-0 right-0 h-7 w-7 border-b border-r border-sand/[0.15]" />
             {/* Orbiting dot */}
             <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sand/40" />
           </div>
@@ -61,7 +61,7 @@ export default function Hero() {
           <img
             src={icon}
             alt="NEXT. icon"
-            className="h-20 w-auto object-contain drop-shadow-[0_0_40px_rgba(200,168,130,0.12)] md:h-24"
+            className="h-44 w-auto object-contain drop-shadow-[0_0_40px_rgba(200,168,130,0.12)] md:h-56"
             style={{ animation: "float 6s ease-in-out infinite" }}
           />
         </motion.div>
@@ -72,7 +72,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="font-nippo font-medium text-[clamp(2.6rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.02em] text-cream text-center"
+          className="font-nippo font-medium text-[clamp(1.2rem,3vw,2.2rem)] leading-[1.1] tracking-[0.05em] text-cream/80 text-center"
         >
           Designing what&apos;s next
         </motion.h1>

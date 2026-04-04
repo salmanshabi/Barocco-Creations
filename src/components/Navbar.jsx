@@ -44,6 +44,9 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  const isProjectPage = location.pathname.startsWith("/project/");
+  const iconWhite = isProjectPage && !scrolled;
+
   const handleNavClick = (e, href) => {
     if (href.startsWith("/#")) {
       if (location.pathname === "/") {
@@ -68,7 +71,12 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3">
-            <img src={monogram} alt="NEXT." className="h-8 w-auto" />
+            <img
+              src={monogram}
+              alt="NEXT."
+              className="h-11 w-auto transition-all duration-500 drop-shadow-[0_0_12px_rgba(200,168,130,0.15)]"
+              style={iconWhite ? { filter: "brightness(0) invert(1)" } : {}}
+            />
             <span className="hidden font-nippo font-medium text-sm uppercase tracking-[0.2em] text-cream/80 md:inline">
               ⟨NEXT.⟩
             </span>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import monogram from "../assets/logo/next-icon.png";
+import monogram from "../assets/logo/next-icon-transparent.svg";
 
 const navLinks = [
   { label: "About", href: "/#about" },

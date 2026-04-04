@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import icon from "../assets/logo/next-icon-transparent.svg";
+import pattern from "../assets/logo/next-pattern.png";
 import Marquee from "./Marquee";
 
 const fadeUp = {
@@ -18,18 +19,15 @@ export default function Hero() {
 
   return (
     <section className="relative flex w-full min-h-screen flex-col justify-between overflow-hidden">
-      {/* Angular X-grid background */}
-      <div className="pointer-events-none absolute inset-0">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="hero-grid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(200,168,130,0.03)" strokeWidth="0.5" />
-              <path d="M 20 20 L 40 40 L 60 20 M 20 60 L 40 40 L 60 60" fill="none" stroke="rgba(200,168,130,0.015)" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-grid)" />
-        </svg>
-      </div>
+      {/* Brand pattern background */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url(${pattern})`,
+          backgroundSize: "160px 160px",
+          backgroundRepeat: "repeat",
+        }}
+      />
 
       {/* Thin accent lines */}
       <div className="pointer-events-none absolute top-0 left-[15%] h-full w-px bg-sand/[0.06]" />

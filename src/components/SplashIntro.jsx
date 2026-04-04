@@ -16,10 +16,10 @@ export default function SplashIntro({ onComplete }) {
   useEffect(() => {
     // draw stroke: 0 → 1.4s
     const fillTimer = setTimeout(() => setPhase("fill"), 1400);
-    // hold filled: 1.4 → 2.4s, then exit
-    const exitTimer = setTimeout(() => setPhase("exit"), 2400);
-    // fully done
-    const doneTimer = setTimeout(() => onComplete(), 3200);
+    // hold filled: 1.4 → 2.8s, then exit (longer hold to breathe)
+    const exitTimer = setTimeout(() => setPhase("exit"), 2800);
+    // fully done — match the 1.2s exit animation
+    const doneTimer = setTimeout(() => onComplete(), 4000);
 
     return () => {
       clearTimeout(fillTimer);
@@ -33,8 +33,8 @@ export default function SplashIntro({ onComplete }) {
       <motion.div
         key="splash"
         initial={{ opacity: 1 }}
-        animate={phase === "exit" ? { opacity: 0, scale: 1.1 } : { opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        animate={phase === "exit" ? { opacity: 0, scale: 1.05 } : { opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-0 z-[9999] flex items-center justify-center bg-olive-dark"
       >
         {/* Bracket corners */}
@@ -43,7 +43,7 @@ export default function SplashIntro({ onComplete }) {
           style={{ width: 220, height: 220 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: phase === "draw" ? 0 : 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="absolute top-0 left-0 h-8 w-8 border-t-2 border-l-2 border-sand/40" />
           <div className="absolute top-0 right-0 h-8 w-8 border-t-2 border-r-2 border-sand/40" />
@@ -73,17 +73,17 @@ export default function SplashIntro({ onComplete }) {
             }}
             transition={{
               pathLength: { duration: 1.4, ease: [0.25, 0.1, 0.25, 1] },
-              opacity: { duration: 0.3 },
+              opacity: { duration: 0.6, ease: "easeInOut" },
             }}
           />
 
-          {/* Filled version fades in */}
+          {/* Filled version crossfades in */}
           <motion.path
             d={ICON_PATH}
             fill="#C8A882"
             initial={{ opacity: 0 }}
-            animate={{ opacity: phase === "fill" || phase === "exit" ? 0.85 : 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            animate={{ opacity: phase === "fill" || phase === "exit" ? 0.9 : 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           />
         </svg>
 
@@ -95,7 +95,7 @@ export default function SplashIntro({ onComplete }) {
             opacity: phase === "fill" || phase === "exit" ? 1 : 0,
             y: phase === "fill" || phase === "exit" ? 0 : 10,
           }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
           Designing what&apos;s next
         </motion.p>

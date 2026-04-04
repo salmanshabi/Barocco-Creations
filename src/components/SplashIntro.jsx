@@ -87,18 +87,6 @@ export default function SplashIntro({ onComplete }) {
           />
         </svg>
 
-        {/* Tagline */}
-        <motion.p
-          className="absolute bottom-[38%] font-nippo-var text-sm tracking-[0.3em] uppercase text-sand/50"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{
-            opacity: phase === "fill" || phase === "exit" ? 1 : 0,
-            y: phase === "fill" || phase === "exit" ? 0 : 10,
-          }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Designing what&apos;s next
-        </motion.p>
       </motion.div>
     </AnimatePresence>
   );

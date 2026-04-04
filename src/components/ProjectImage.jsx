@@ -84,7 +84,7 @@ const patterns = {
       ))}
     </>
   ),
-  "barocco-creations": (
+  "next-default": (
     <>
       {/* Concentric arcs */}
       {[120, 180, 240, 300, 360].map((r) => (
@@ -209,19 +209,19 @@ export default function ProjectImage({ projectId, number, className = "", aspect
         preserveAspectRatio="xMidYMid slice"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {patterns[projectId] || patterns["barocco-creations"]}
+        {patterns[projectId] || patterns["next-default"]}
       </svg>
 
       {/* Project number */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-cormorant text-[8rem] font-light leading-none text-sand/[0.06] select-none">
+        <span className="font-nippo-var text-[8rem] font-light leading-none text-sand/[0.06] select-none">
           {number}
         </span>
       </div>
 
       {/* BC watermark bottom-right */}
       <div className="absolute right-4 bottom-4">
-        <span className="font-cormorant text-sm font-light text-sand/[0.12] select-none">
+        <span className="font-nippo-var text-sm font-light text-sand/[0.12] select-none">
           BC
         </span>
       </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import monogram from "../assets/logo/favicon3.png";
+import monogram from "../assets/logo/next-icon.png";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -68,9 +68,9 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3">
-            <img src={monogram} alt="BC" className="h-8 w-auto" />
-            <span className="hidden font-cormorant text-lg font-light tracking-wide text-cream/80 md:inline">
-              Barocco Creations
+            <img src={monogram} alt="NEXT." className="h-8 w-auto" />
+            <span className="hidden font-nippo font-medium text-sm uppercase tracking-[0.2em] text-cream/80 md:inline">
+              ⟨NEXT.⟩
             </span>
           </Link>
 
@@ -81,7 +81,7 @@ export default function Navbar() {
                 key={link.label}
                 to={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="font-jost text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors duration-300 hover:text-sand"
+                className="font-nippo-var text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors duration-300 hover:text-sand"
               >
                 {link.label}
               </Link>
@@ -141,7 +141,7 @@ export default function Navbar() {
                   <Link
                     to={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="font-cormorant text-5xl font-light tracking-wide text-cream/60 transition-colors hover:text-sand"
+                    className="font-nippo font-medium text-5xl tracking-wide text-cream/60 transition-colors hover:text-sand"
                   >
                     {link.label}
                   </Link>
@@ -153,9 +153,9 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="absolute bottom-10 font-pinyon text-lg text-sand/30"
+              className="absolute bottom-10 font-nippo-var text-lg text-sand/30"
             >
-              Art meets function
+              Designing what&apos;s next
             </motion.p>
           </motion.div>
         )}

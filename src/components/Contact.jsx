@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
-import monogram from "../assets/logo/favicon3.png";
+import monogram from "../assets/logo/next-icon-transparent.svg";
+
+const WEB3FORMS_KEY = "YOUR_ACCESS_KEY"; // Replace after verifying at web3forms.com
 
 const socials = [
   { label: "GitHub", href: "#", icon: "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" },
@@ -10,17 +13,54 @@ const socials = [
 ];
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", project: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+
+  const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New enquiry from ${form.name} — ${form.project || "General"}`,
+          from_name: form.name,
+          name: form.name,
+          email: form.email,
+          project_type: form.project,
+          message: form.message,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({ name: "", email: "", project: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="contact" className="relative px-6 py-32">
       {/* Background monogram */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
         <div className="relative">
-          {/* Orbit ring */}
-          <div
-            className="absolute inset-[-4vh] rounded-full border border-sand/[0.03]"
-            style={{ animation: "spin-slow 60s linear infinite" }}
-          >
-            <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sand/20" />
+          {/* Angular bracket frame */}
+          <div className="absolute inset-[-4vh]" style={{ animation: "spin-slow 60s linear infinite" }}>
+            <div className="absolute top-0 left-0 h-8 w-8 border-t border-l border-sand/[0.04]" />
+            <div className="absolute top-0 right-0 h-8 w-8 border-t border-r border-sand/[0.04]" />
+            <div className="absolute bottom-0 left-0 h-8 w-8 border-b border-l border-sand/[0.04]" />
+            <div className="absolute bottom-0 right-0 h-8 w-8 border-b border-r border-sand/[0.04]" />
+            <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-sand/20" />
           </div>
 
           <img
@@ -33,14 +73,14 @@ export default function Contact() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-xl">
-        <SectionLabel>[ Let&apos;s Create Together ]</SectionLabel>
+        <SectionLabel>⟨ Let&apos;s Connect ⟩</SectionLabel>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mb-14 text-center font-cormorant text-[clamp(2rem,5vw,3.2rem)] font-light text-cream/85"
+          className="mb-14 text-center font-nippo font-medium text-[clamp(2rem,5vw,3.2rem)] text-cream/85"
         >
           Have a project in mind?
         </motion.h2>
@@ -51,65 +91,88 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="space-y-8"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <div className="group">
-            <label className="mb-2 block font-mono text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
+            <label className="mb-2 block font-nippo-var text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
               Name
             </label>
             <input
               type="text"
-              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-jost text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
+              required
+              value={form.name}
+              onChange={update("name")}
+              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-nippo-var text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
             />
           </div>
           <div className="group">
-            <label className="mb-2 block font-mono text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
+            <label className="mb-2 block font-nippo-var text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
               Email
             </label>
             <input
               type="email"
-              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-jost text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
+              required
+              value={form.email}
+              onChange={update("email")}
+              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-nippo-var text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
             />
           </div>
           <div className="group">
-            <label className="mb-2 block font-mono text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
+            <label className="mb-2 block font-nippo-var text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
               Project Type
             </label>
             <select
-              defaultValue=""
-              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-jost text-sm font-light text-cream/40 outline-none transition-colors focus:border-sand/40 focus:text-cream [&:has(option:checked:not([value='']))]:text-cream"
+              value={form.project}
+              onChange={update("project")}
+              className="w-full border-b border-sand/10 bg-transparent py-2.5 font-nippo-var text-sm font-light text-cream/40 outline-none transition-colors focus:border-sand/40 focus:text-cream [&:has(option:checked:not([value='']))]:text-cream"
             >
               <option value="" disabled>Select...</option>
-              <option value="brand" className="bg-olive-dark text-cream">Brand Identity</option>
-              <option value="web" className="bg-olive-dark text-cream">Web Development</option>
-              <option value="uxui" className="bg-olive-dark text-cream">UX/UI Design</option>
-              <option value="other" className="bg-olive-dark text-cream">Other</option>
+              <option value="Brand Identity" className="bg-olive-dark text-cream">Brand Identity</option>
+              <option value="Web Development" className="bg-olive-dark text-cream">Web Development</option>
+              <option value="UX/UI Design" className="bg-olive-dark text-cream">UX/UI Design</option>
+              <option value="Other" className="bg-olive-dark text-cream">Other</option>
             </select>
           </div>
           <div className="group">
-            <label className="mb-2 block font-mono text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
+            <label className="mb-2 block font-nippo-var text-[9px] uppercase tracking-[0.3em] text-sand/30 transition-colors group-focus-within:text-sand/60">
               Message
             </label>
             <textarea
               rows={3}
-              className="w-full resize-none border-b border-sand/10 bg-transparent py-2.5 font-jost text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
+              required
+              value={form.message}
+              onChange={update("message")}
+              className="w-full resize-none border-b border-sand/10 bg-transparent py-2.5 font-nippo-var text-sm font-light text-cream outline-none transition-colors focus:border-sand/40"
             />
           </div>
+
           <button
             type="submit"
-            className="mt-6 w-full border border-sand bg-sand py-3.5 font-jost text-xs font-medium uppercase tracking-[0.2em] text-olive-dark transition-all duration-300 hover:bg-transparent hover:text-sand"
+            disabled={status === "sending"}
+            className="mt-6 w-full border border-sand bg-sand py-3.5 font-nippo-var text-xs font-medium uppercase tracking-[0.2em] text-olive-dark transition-all duration-300 hover:bg-transparent hover:text-sand disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {status === "sending" ? "Sending…" : "Send Message"}
           </button>
+
+          {status === "success" && (
+            <p className="mt-4 text-center font-nippo-var text-sm text-emerald-400/80">
+              Message sent successfully! I&apos;ll get back to you soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="mt-4 text-center font-nippo-var text-sm text-red-400/80">
+              Something went wrong. Please try again or email me directly.
+            </p>
+          )}
         </motion.form>
 
         {/* Email + socials */}
         <div className="mt-16 flex flex-col items-center gap-8">
           <a
-            href="mailto:hello@baroccocreations.com"
-            className="font-jost text-sm font-light tracking-wide text-sand/50 transition-colors hover:text-sand"
+            href="mailto:baroccocreations@gmail.com"
+            className="font-nippo-var text-sm font-light tracking-wide text-sand/50 transition-colors hover:text-sand"
           >
-            hello@baroccocreations.com
+            baroccocreations@gmail.com
           </a>
           <div className="flex gap-5">
             {socials.map((s) => (

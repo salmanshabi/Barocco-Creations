@@ -35,7 +35,7 @@ function MagneticCTA({ to, children }) {
       <motion.span
         animate={{ x: offset.x, y: offset.y }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="relative font-jost text-xs uppercase tracking-[0.2em] text-sand"
+        className="relative font-nippo-var text-xs uppercase tracking-[0.2em] text-sand"
       >
         {children}
         <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-sand transition-all duration-500 group-hover:w-full" />
@@ -70,7 +70,7 @@ function ProjectSlide({ project, index, total }) {
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="pointer-events-none absolute -left-2 -top-8 font-cormorant text-[clamp(6rem,12vw,10rem)] font-light leading-none text-sand/[0.05] select-none md:-left-6 md:-top-14"
+            className="pointer-events-none absolute -left-2 -top-8 font-nippo-var text-[clamp(6rem,12vw,10rem)] font-light leading-none text-sand/[0.05] select-none md:-left-6 md:-top-14"
           >
             {num}
           </motion.span>
@@ -80,7 +80,7 @@ function ProjectSlide({ project, index, total }) {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-              className="font-cormorant text-[clamp(2.2rem,5vw,4rem)] font-light leading-[1.05] text-cream"
+              className="font-nippo font-medium text-[clamp(2.2rem,5vw,4rem)] leading-[1.05] text-cream"
             >
               {project.name}
             </motion.h3>
@@ -94,12 +94,12 @@ function ProjectSlide({ project, index, total }) {
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate/50"
+                  className="font-nippo-var text-[10px] uppercase tracking-[0.2em] text-slate/50"
                 >
                   {tag}
                 </span>
               ))}
-              <span className="font-mono text-[10px] text-sand/30">
+              <span className="font-nippo-var text-[10px] text-sand/30">
                 {project.year}
               </span>
             </motion.div>
@@ -108,7 +108,7 @@ function ProjectSlide({ project, index, total }) {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 max-w-md font-jost text-[15px] font-light leading-relaxed text-cream/40"
+              className="mt-6 max-w-md font-nippo-var text-[15px] font-light leading-relaxed text-cream/40"
             >
               {project.teaser}
             </motion.p>
@@ -234,14 +234,14 @@ export default function Portfolio() {
   return (
     <section id="work" className="py-20">
       <div className="px-6">
-        <SectionLabel>[ Selected Work ]</SectionLabel>
+        <SectionLabel>⟨ Selected Work ⟩</SectionLabel>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-14 text-center font-cormorant text-[clamp(2rem,4vw,3rem)] font-light text-cream/80"
+          className="mb-14 text-center font-nippo font-medium text-[clamp(2rem,4vw,3rem)] text-cream/80"
         >
           Projects &amp; Case Studies
         </motion.h2>
@@ -252,7 +252,7 @@ export default function Portfolio() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`rounded-full border px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ${
+              className={`border px-4 py-1.5 font-nippo-var text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ${
                 active === cat
                   ? "border-sand bg-sand text-olive-dark"
                   : "border-sand/20 text-sand/50 hover:border-sand/40 hover:text-sand/80"
@@ -280,8 +280,8 @@ export default function Portfolio() {
               {i < filtered.length - 1 && (
                 <div className="mx-auto flex max-w-6xl items-center gap-4 px-6">
                   <div className="h-px flex-1 bg-sand/[0.06]" />
-                  <span className="font-mono text-[8px] tracking-[0.4em] text-sand/15">
-                    {String(i + 2).padStart(2, "0")}
+                  <span className="font-nippo-var text-[8px] tracking-[0.4em] text-sand/15">
+                    ✕
                   </span>
                   <div className="h-px flex-1 bg-sand/[0.06]" />
                 </div>

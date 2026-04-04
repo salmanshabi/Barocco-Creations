@@ -155,7 +155,7 @@ export default function ProjectDetail() {
         {/* Back button */}
         <Link
           to="/"
-          className="absolute top-24 left-6 z-10 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] transition-colors hover:opacity-100 md:left-12"
+          className="absolute top-24 left-6 z-10 inline-flex items-center gap-2 font-nippo-var text-[10px] uppercase tracking-[0.25em] transition-colors hover:opacity-100 md:left-12"
           style={{ color: `${t.accentLight}80` }}
           onMouseEnter={(e) => (e.currentTarget.style.color = t.accentLight)}
           onMouseLeave={(e) => (e.currentTarget.style.color = `${t.accentLight}80`)}
@@ -175,7 +175,7 @@ export default function ProjectDetail() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-cormorant text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-[1.05]"
+                  className="font-nippo font-medium text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05]"
                   style={{ color: t.text }}
                 >
                   {project.name}
@@ -189,7 +189,7 @@ export default function ProjectDetail() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10px] uppercase tracking-[0.2em]"
+                      className="font-nippo-var text-[10px] uppercase tracking-[0.2em]"
                       style={{ color: `${t.accent}99` }}
                     >
                       {tag}
@@ -201,7 +201,7 @@ export default function ProjectDetail() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="hidden shrink-0 font-mono text-sm md:block"
+                className="hidden shrink-0 font-nippo-var text-sm md:block"
                 style={{ color: `${t.accentLight}66` }}
               >
                 {project.year}
@@ -254,13 +254,13 @@ export default function ProjectDetail() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <h2
-              className="mb-6 font-mono text-[10px] uppercase tracking-[0.3em]"
+              className="mb-6 font-nippo-var text-[10px] uppercase tracking-[0.3em]"
               style={{ color: `${t.accent}88` }}
             >
               About the project
             </h2>
             <p
-              className="font-jost text-base font-light leading-[1.9]"
+              className="font-nippo-var text-base font-light leading-[1.9]"
               style={{ color: `${t.text}88` }}
             >
               {project.description}
@@ -287,13 +287,13 @@ export default function ProjectDetail() {
                 style={{ borderBottom: `1px solid ${t.border}` }}
               >
                 <p
-                  className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.3em]"
+                  className="mb-1.5 font-nippo-var text-[9px] uppercase tracking-[0.3em]"
                   style={{ color: `${t.accent}66` }}
                 >
                   {row.label}
                 </p>
                 <p
-                  className="font-jost text-sm font-light"
+                  className="font-nippo-var text-sm font-light"
                   style={{ color: t.textMuted }}
                 >
                   {row.value}
@@ -312,7 +312,7 @@ export default function ProjectDetail() {
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <BaroqueOrnament color={`${t.accent}44`} delay={0.5} />
               <h3
-                className="mb-10 text-center font-cormorant text-xl font-light italic tracking-wide"
+                className="mb-10 text-center font-nippo font-medium text-xl italic tracking-wide"
                 style={{ color: `${t.accentLight}88` }}
               >
                 Project Gallery
@@ -357,7 +357,7 @@ export default function ProjectDetail() {
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <EunoiaOrnament color={`${t.accent}33`} delay={0.5} />
               <h3
-                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                className="mb-12 text-center font-nippo font-medium text-xl italic tracking-wide"
                 style={{ color: `${t.accentLight}88` }}
               >
                 Visual Identity
@@ -401,7 +401,7 @@ export default function ProjectDetail() {
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <LaCocoOrnament color={`${t.accent}33`} delay={0.5} />
               <h3
-                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                className="mb-12 text-center font-nippo font-medium text-xl italic tracking-wide"
                 style={{ color: `${t.accentLight}88` }}
               >
                 Brand Packaging
@@ -445,7 +445,7 @@ export default function ProjectDetail() {
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <VentenaraOrnament color={`${t.accent}33`} delay={0.5} />
               <h3
-                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                className="mb-12 text-center font-nippo font-medium text-xl italic tracking-wide"
                 style={{ color: `${t.accentLight}88` }}
               >
                 Brand Identity
@@ -490,7 +490,7 @@ export default function ProjectDetail() {
             <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
               <MiraWaveDivider color={`${t.accent}33`} delay={0.5} />
               <h3
-                className="mb-12 text-center font-cormorant text-xl font-light italic tracking-wide"
+                className="mb-12 text-center font-nippo font-medium text-xl italic tracking-wide"
                 style={{ color: `${t.accentLight}88` }}
               >
                 Brand Showcase
@@ -554,7 +554,7 @@ export default function ProjectDetail() {
         ) : (
           <>
             <h3
-              className="mb-8 px-6 font-mono text-[10px] uppercase tracking-[0.3em] md:px-12"
+              className="mb-8 px-6 font-nippo-var text-[10px] uppercase tracking-[0.3em] md:px-12"
               style={{ color: `${t.accent}55` }}
             >
               Project Gallery
@@ -587,13 +587,13 @@ export default function ProjectDetail() {
         <div className="px-6 py-16 md:px-12 lg:px-20">
           <div className="mx-auto max-w-6xl">
             <h3
-              className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em]"
+              className="mb-4 font-nippo-var text-[10px] uppercase tracking-[0.3em]"
               style={{ color: `${t.accent}55` }}
             >
               Live Preview
             </h3>
             <p
-              className="mb-8 font-jost text-sm font-light"
+              className="mb-8 font-nippo-var text-sm font-light"
               style={{ color: `${t.textMuted}88` }}
             >
               Interact with the live website below — scroll, click, and explore the full experience.
@@ -619,7 +619,7 @@ export default function ProjectDetail() {
                   style={{ backgroundColor: `${t.bg}88` }}
                 >
                   <span
-                    className="font-mono text-[11px]"
+                    className="font-nippo-var text-[11px]"
                     style={{ color: `${t.text}44` }}
                   >
                     {project.link}
@@ -629,7 +629,7 @@ export default function ProjectDetail() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] uppercase tracking-[0.15em] transition-colors"
+                  className="font-nippo-var text-[10px] uppercase tracking-[0.15em] transition-colors"
                   style={{ color: `${t.accent}88` }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = t.accent)}
                   onMouseLeave={(e) => (e.currentTarget.style.color = `${t.accent}88`)}
@@ -658,7 +658,7 @@ export default function ProjectDetail() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 font-jost text-xs font-medium uppercase tracking-[0.2em] transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 font-nippo-var text-xs font-medium uppercase tracking-[0.2em] transition-all duration-300"
             style={{
               border: `1px solid ${t.accent}`,
               backgroundColor: t.accent,
@@ -688,7 +688,7 @@ export default function ProjectDetail() {
       >
         <div className="mx-auto max-w-6xl">
           <p
-            className="mb-4 font-mono text-[9px] uppercase tracking-[0.3em]"
+            className="mb-4 font-nippo-var text-[9px] uppercase tracking-[0.3em]"
             style={{ color: `${t.accent}44` }}
           >
             Next Project
@@ -698,7 +698,7 @@ export default function ProjectDetail() {
             className="group inline-flex items-baseline gap-6"
           >
             <span
-              className="font-cormorant text-[clamp(1.5rem,4vw,3rem)] font-light transition-colors duration-500"
+              className="font-nippo font-medium text-[clamp(1.5rem,4vw,3rem)] transition-colors duration-500"
               style={{ color: `${t.text}66` }}
               onMouseEnter={(e) => (e.currentTarget.style.color = t.text)}
               onMouseLeave={(e) => (e.currentTarget.style.color = `${t.text}66`)}
@@ -706,14 +706,14 @@ export default function ProjectDetail() {
               {nextProject.name}
             </span>
             <span
-              className="font-mono text-xs transition-all duration-300 group-hover:translate-x-2"
+              className="font-nippo-var text-xs transition-all duration-300 group-hover:translate-x-2"
               style={{ color: `${t.accent}55` }}
             >
               &rarr;
             </span>
           </Link>
           <p
-            className="mt-2 font-mono text-[10px]"
+            className="mt-2 font-nippo-var text-[10px]"
             style={{ color: `${t.textMuted}55` }}
           >
             {nextNum} &middot; {nextProject.category}

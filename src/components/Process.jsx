@@ -16,7 +16,7 @@ export default function Process() {
   return (
     <section id="process" className="px-6 py-32">
       <div className="mx-auto max-w-5xl">
-        <SectionLabel>[ How I Work ]</SectionLabel>
+        <SectionLabel>⟨ Process ⟩</SectionLabel>
 
         <div ref={ref} className="relative mt-20">
           {/* Connecting line */}
@@ -42,18 +42,18 @@ export default function Process() {
                 }}
                 className="relative text-center"
               >
-                {/* Step dot on line */}
+                {/* Step diamond on line */}
                 <div className="mx-auto mb-6 hidden h-3 w-3 items-center justify-center md:flex">
-                  <div className="h-1.5 w-1.5 rounded-full bg-sand/40" />
+                  <div className="h-2 w-2 rotate-45 bg-sand/40" />
                 </div>
 
-                <p className="font-cormorant text-[3.5rem] font-light leading-none text-sand/15 md:text-[4rem]">
+                <p className="font-nippo-var text-[3.5rem] font-light leading-none text-sand/15 md:text-[4rem]">
                   {step.num}
                 </p>
-                <h3 className="mt-2 font-cormorant text-xl font-light tracking-wide text-cream/80">
+                <h3 className="mt-2 font-nippo font-medium text-xl tracking-wide text-cream/80">
                   {step.title}
                 </h3>
-                <p className="mt-3 font-jost text-[13px] font-light leading-relaxed text-cream/35">
+                <p className="mt-3 font-nippo-var text-[13px] font-light leading-relaxed text-cream/35">
                   {step.desc}
                 </p>
               </motion.div>

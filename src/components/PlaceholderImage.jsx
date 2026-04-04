@@ -28,7 +28,7 @@ export default function PlaceholderImage({ className = "", aspect = "4/3" }) {
       </svg>
       {/* BC watermark */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-cormorant text-6xl font-light text-sand/10 select-none">
+        <span className="font-nippo-var text-6xl font-light text-sand/10 select-none">
           BC
         </span>
       </div>

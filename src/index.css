@@ -1,5 +1,49 @@
 @import "tailwindcss";
 
+/* ── Nippo font-face declarations ── */
+@font-face {
+  font-family: "Nippo";
+  src: url("./assets/fonts/Nippo-Extralight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nippo";
+  src: url("./assets/fonts/Nippo-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nippo";
+  src: url("./assets/fonts/Nippo-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nippo";
+  src: url("./assets/fonts/Nippo-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nippo";
+  src: url("./assets/fonts/Nippo-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nippo Variable";
+  src: url("./assets/fonts/Nippo-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-olive-dark: #131518;
   --color-olive-base: #1a1c22;
@@ -8,10 +52,8 @@
   --color-slate: #7a9baa;
   --color-cream: #e8e2d5;
 
-  --font-cormorant: "Cormorant Garamond", serif;
-  --font-jost: "Jost", sans-serif;
-  --font-pinyon: "Pinyon Script", cursive;
-  --font-mono: "DM Mono", monospace;
+  --font-nippo: "Nippo", sans-serif;
+  --font-nippo-var: "Nippo Variable", sans-serif;
 }
 
 html {
@@ -25,7 +67,7 @@ body {
   overflow-x: hidden;
   background-color: #131518;
   color: #e8e2d5;
-  font-family: "Jost", sans-serif;
+  font-family: "Nippo Variable", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

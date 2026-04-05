@@ -640,7 +640,7 @@ export default function ProjectDetail() {
 
               {/* Iframe */}
               <iframe
-                src={project.link}
+                src={`${project.link}?v=${Date.now()}`}
                 title={`${project.name} — Live Preview`}
                 className="h-[75vh] w-full bg-white"
                 loading="lazy"

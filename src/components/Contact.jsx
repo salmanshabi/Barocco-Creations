@@ -166,14 +166,8 @@ export default function Contact() {
           )}
         </motion.form>
 
-        {/* Email + socials */}
+        {/* Socials */}
         <div className="mt-16 flex flex-col items-center gap-8">
-          <a
-            href="mailto:baroccocreations@gmail.com"
-            className="font-nippo-var text-sm font-light tracking-wide text-sand/50 transition-colors hover:text-sand"
-          >
-            baroccocreations@gmail.com
-          </a>
           <div className="flex gap-5">
             {socials.map((s) => (
               <a

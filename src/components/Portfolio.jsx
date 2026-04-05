@@ -206,7 +206,7 @@ export default function Portfolio() {
   const filtered =
     active === "All"
       ? projects
-      : projects.filter((p) => p.category === active);
+      : projects.filter((p) => Array.isArray(p.category) ? p.category.includes(active) : p.category === active);
 
   useEffect(() => {
     const container = containerRef.current;

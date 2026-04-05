@@ -151,7 +151,7 @@ const projects = [
   {
     id: "herbalook-catalogue",
     name: "Herbalook Catalogue",
-    category: "UX/UI",
+    category: ["UX/UI", "Web Projects"],
     tags: ["Web App", "UX/UI", "React"],
     year: "2025",
     teaser: "A B2B product catalogue for organic yerba mate with animated storytelling",
@@ -178,7 +178,7 @@ const projects = [
   {
     id: "nexora-ai",
     name: "Nexora AI",
-    category: "UX/UI",
+    category: ["UX/UI", "Web Projects"],
     tags: ["Web App", "AI", "Next.js"],
     year: "2025",
     teaser: "An AI-powered website builder with template studio, drag-and-drop editor, and multi-language support",
@@ -234,6 +234,7 @@ const projects = [
 export const filterCategories = [
   "All",
   "UX/UI",
+  "Web Projects",
   "Branding",
 ];
 

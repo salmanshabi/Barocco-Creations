@@ -168,6 +168,12 @@ export default function Contact() {
 
         {/* Socials */}
         <div className="mt-16 flex flex-col items-center gap-8">
+          <a
+            href="mailto:design@next-visuals.com"
+            className="font-nippo-var text-sm font-light text-sand/50 transition-colors duration-300 hover:text-sand"
+          >
+            design@next-visuals.com
+          </a>
           <div className="flex gap-5">
             {socials.map((s) => (
               <a
